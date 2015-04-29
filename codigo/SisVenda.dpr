@@ -12,8 +12,6 @@ uses
   uUsuario in 'uUsuario.pas' {FUsuario},
   UEntradaEstoque in 'UEntradaEstoque.pas' {FEntradaEstoque},
   uConta in 'uConta.pas' {FConta};
-
-
 {$R *.res}
 
 begin

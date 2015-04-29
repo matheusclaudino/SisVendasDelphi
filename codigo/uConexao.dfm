@@ -1,9 +1,9 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
-  Left = 775
-  Top = 145
-  Height = 365
-  Width = 679
+  Left = 518
+  Top = 139
+  Height = 395
+  Width = 699
   object dbSisVenda: TDatabase
     AliasName = 'SistemaDeVendas'
     DatabaseName = 'SistemaDeVendas'
@@ -1046,18 +1046,15 @@ object DataModule1: TDataModule1
   object qEntrada: TQuery
     DatabaseName = 'SistemaDeVendas'
     SQL.Strings = (
-      'SELECT * FROM responsavel_estoque')
+      'select resp_est.*, p.descricao'
+      'from responsavel_estoque resp_est'
+      'left outer join produto p on resp_est.idProduto = p.idProduto')
     Left = 368
     Top = 64
     object qEntradaidEntrada: TFloatField
       FieldName = 'idEntrada'
       Origin = 'SISTEMADEVENDAS.responsavel_estoque.idEntrada'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-    end
-    object qEntradaidUsuario: TIntegerField
-      FieldName = 'idUsuario'
-      Origin = 'SISTEMADEVENDAS.responsavel_estoque.idUsuario'
-      ProviderFlags = [pfInUpdate]
     end
     object qEntradaidProduto: TIntegerField
       FieldName = 'idProduto'
@@ -1075,6 +1072,16 @@ object DataModule1: TDataModule1
       ProviderFlags = [pfInUpdate]
       Size = 10
     end
+    object qEntradadescricao: TStringField
+      FieldName = 'descricao'
+      Origin = 'SISTEMADEVENDAS.produto.descricao'
+      ProviderFlags = []
+      Size = 100
+    end
+    object qEntradaidUsuario: TIntegerField
+      FieldName = 'idUsuario'
+      Origin = 'SISTEMADEVENDAS.responsavel_estoque.idUsuario'
+    end
   end
   object mEntrada: TClientDataSet
     Aggregates = <>
@@ -1089,9 +1096,6 @@ object DataModule1: TDataModule1
     object mEntradaidEntrada: TFloatField
       FieldName = 'idEntrada'
     end
-    object mEntradaidUsuario: TIntegerField
-      FieldName = 'idUsuario'
-    end
     object mEntradaidProduto: TIntegerField
       FieldName = 'idProduto'
     end
@@ -1102,23 +1106,21 @@ object DataModule1: TDataModule1
       FieldName = 'dataAlteracaoEstoque'
       Size = 10
     end
-    object mEntradaProduto: TStringField
-      FieldKind = fkLookup
-      FieldName = 'Produto'
-      LookupDataSet = qProduto
-      LookupKeyFields = 'idProduto'
-      LookupResultField = 'descricao'
-      KeyFields = 'idProduto'
-      Size = 50
-      Lookup = True
+    object mEntradadescricao: TStringField
+      FieldName = 'descricao'
+      Size = 100
     end
-    object mEntradaUsuario: TStringField
+    object mEntradaidUsuario: TIntegerField
+      FieldName = 'idUsuario'
+    end
+    object mEntradausuario: TStringField
       FieldKind = fkLookup
-      FieldName = 'Usuario'
-      LookupDataSet = mUsuario
+      FieldName = 'usuario'
+      LookupDataSet = qUsuario
       LookupKeyFields = 'idUsuario'
       LookupResultField = 'nome'
       KeyFields = 'idUsuario'
+      Size = 50
       Lookup = True
     end
   end
@@ -1322,8 +1324,8 @@ object DataModule1: TDataModule1
     Aggregates = <>
     Params = <>
     ProviderName = 'pFaturamento'
-    Left = 312
-    Top = 65496
+    Left = 512
+    Top = 124
     object mFaturamentoidFaturamento: TIntegerField
       FieldName = 'idFaturamento'
     end

@@ -97,17 +97,6 @@ type
     qEntrada: TQuery;
     mEntrada: TClientDataSet;
     pEntrada: TDataSetProvider;
-    qEntradaidUsuario: TIntegerField;
-    qEntradaidProduto: TIntegerField;
-    qEntradaqtd: TIntegerField;
-    qEntradadataAlteracaoEstoque: TStringField;
-    qEntradaidEntrada: TFloatField;
-    mEntradaidEntrada: TFloatField;
-    mEntradaidUsuario: TIntegerField;
-    mEntradaidProduto: TIntegerField;
-    mEntradaqtd: TIntegerField;
-    mEntradadataAlteracaoEstoque: TStringField;
-    mEntradaProduto: TStringField;
     qConta: TQuery;
     mConta: TClientDataSet;
     pConta: TDataSetProvider;
@@ -153,7 +142,6 @@ type
     mFaturamentoidPedido: TIntegerField;
     mFaturamentodata_faturamento: TStringField;
     mFaturamentonf: TFloatField;
-    mEntradaUsuario: TStringField;
     qEntradaEan: TQuery;
     mEntradaEan: TClientDataSet;
     pEntradaEan: TDataSetProvider;
@@ -163,6 +151,19 @@ type
     qEntradaEanidProduto: TIntegerField;
     qEntradaEandescricao: TStringField;
     qEntradaEanean: TFloatField;
+    qEntradaidProduto: TIntegerField;
+    qEntradaqtd: TIntegerField;
+    qEntradadataAlteracaoEstoque: TStringField;
+    qEntradaidEntrada: TFloatField;
+    qEntradadescricao: TStringField;
+    mEntradaidEntrada: TFloatField;
+    mEntradaidProduto: TIntegerField;
+    mEntradaqtd: TIntegerField;
+    mEntradadataAlteracaoEstoque: TStringField;
+    mEntradadescricao: TStringField;
+    qEntradaidUsuario: TIntegerField;
+    mEntradaidUsuario: TIntegerField;
+    mEntradausuario: TStringField;
 
     procedure mClienteAfterPost(DataSet: TDataSet);
     procedure mClienteAfterDelete(DataSet: TDataSet);
@@ -232,7 +233,7 @@ begin
   qAux.SQL.Text := 'select valor from parametro where idParametro =:p';
   qAux.ParamByName('p').AsString := p;
   qAux.Open;
-  
+
   if not qAux.IsEmpty then
   begin
     i := StrToInt(qAux.Fields[0].AsString);
@@ -289,6 +290,7 @@ end;
 procedure TDataModule1.mPedidoAfterInsert(DataSet: TDataSet);
 begin
   mPedidoidPedido.AsInteger := buscaProximoParametro('SeqPedido');
+  mPedidofaturado.AsBoolean := false;
 end;
 
 procedure TDataModule1.mProdutoAfterPost(DataSet: TDataSet);

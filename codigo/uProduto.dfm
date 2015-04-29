@@ -1,6 +1,6 @@
 inherited FProduto: TFProduto
-  Left = 417
-  Top = 35
+  Left = 375
+  Top = 238
   Height = 516
   Caption = 'FProduto'
   OldCreateOrder = True
@@ -8,6 +8,17 @@ inherited FProduto: TFProduto
   TextHeight = 13
   inherited StatusBar1: TStatusBar
     Top = 459
+  end
+  inherited ToolBar1: TToolBar
+    object Button1: TButton
+      Left = 230
+      Top = 0
+      Width = 43
+      Height = 27
+      Caption = 'EXCEL'
+      TabOrder = 0
+      OnClick = Button1Click
+    end
   end
   inherited PageControl1: TPageControl
     Height = 428
@@ -111,6 +122,11 @@ inherited FProduto: TFProduto
           DataSource = DS
           TabOrder = 5
         end
+      end
+    end
+    inherited tbFiltros: TTabSheet
+      inherited DBGrid1: TDBGrid
+        Height = 335
       end
     end
   end

@@ -45,9 +45,7 @@ type
     qProdutoean: TFloatField;
     qValorTotal: TQuery;
     ed_vlTotal: TDBEdit;
-    Timer1: TTimer;
     ed_tecla: TEdit;
-    SpeedButton1: TSpeedButton;
     btnFaturar: TToolButton;
     procedure ed_barraKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -55,11 +53,16 @@ type
     procedure btnNovoClick(Sender: TObject);
     procedure ed_teclaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnFaturarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnPesquisarClick(Sender: TObject);
+    procedure DBGrid2DblClick(Sender: TObject);
+    procedure DBGrid2KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -77,6 +80,7 @@ procedure TFPedido.ed_barraKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   inherited;
+
   if (key = 13) and (trim(ed_barra.Text) <> '') then
   begin
       qProduto.Close;
@@ -93,7 +97,7 @@ begin
          DataModule1.mPedidoItemquantidade.AsInteger :=DataModule1.mPedidoItemquantidade.AsInteger +1;
          DataModule1.mPedidoItemprecoParcial.AsFloat := ((DataModule1.mPedidoItemquantidade.AsInteger)*(DataModule1.mPedidoItemprecoUnitario.AsFloat));
 
-         
+
          {Mostra a linha da DBGrid separadamente}
          DBEdit7.Text := DataModule1.mPedidoItemidPedido.AsString;
          DBEdit8.Text := DataModule1.mPedidoItemidProduto.AsString;
@@ -127,14 +131,10 @@ begin
       qValorTotal.Close;
       qValorTotal.ParamByName('PVlTotal').AsString:=(DBEdit1.Text);
       qValorTotal.Open;
-      
       if not DataModule1.mpedidoitem.Active then {Atualiza Edit vl_Total - Abre Edição}
             DataModule1.mpedidoitem.Open;
-
-
       {ShowMessage(qValorTotal.FieldByName('total').AsString);}
       DataModule1.mPedidovalorTotal.AsFloat := StrToInt(qValorTotal.FieldByName('total').AsString);
-
       {Volta o Foco pro Edit EAN}
       ed_barra.clear;
       ed_barra.SetFocus;
@@ -150,6 +150,9 @@ end;
 
 procedure TFPedido.btnNovoClick(Sender: TObject);
 begin
+  PageControl1.ActivePageIndex := 0;
+  btnFaturar.Enabled := false;
+
   inherited;
 
   {Indica a data Atual Como data do Pedido}
@@ -157,6 +160,7 @@ begin
 
   {Indica um prazo padrão}
   DataModule1.mPedidoprazoPagamento.Text := IntToStr(7);
+  
 end;
 
 procedure TFPedido.ed_teclaKeyDown(Sender: TObject; var Key: Word;
@@ -164,12 +168,6 @@ procedure TFPedido.ed_teclaKeyDown(Sender: TObject; var Key: Word;
 begin
   inherited;
   ShowMessage('O nº da tecla: '+Char(ORD(Key))+' é => '+IntToStr(key));
-end;
-
-procedure TFPedido.FormShow(Sender: TObject);
-begin
-  inherited;
-  Timer1.Enabled := true;
 end;
 
 procedure TFPedido.SpeedButton1Click(Sender: TObject);
@@ -180,14 +178,16 @@ end;
 
 procedure TFPedido.btnSalvarClick(Sender: TObject);
 begin
-  DataModule1.mPedidofaturado.Value := false;
+  
   inherited;
+  btnFaturar.Enabled := true;
 
 
 end;
 
 procedure TFPedido.btnAlterarClick(Sender: TObject);
 begin
+  btnFaturar.Enabled := false;
   {Faz o controle - Pedidos já faturados não devem ser alterados}
   if(Ds.DataSet.FieldByName('faturado').AsBoolean = false)then
   begin
@@ -209,13 +209,108 @@ begin
         begin
             if (Application.MessageBox('Deseja Faturar Pedido ?', 'Faturamento', MB_YESNO + MB_ICONQUESTION) = id_yes) then
             begin
-              {Fazer aqui o código de faturamento do pedido;}
+
+              {Abre Edição}
+              if not DataModule1.mFaturamento.Active then
+                  DataModule1.mFaturamento.Open;
+
+              {Alteração do Status do Pedido}
+              DataModule1.mPedido.Edit;
+              DataModule1.mPedidofaturado.AsBoolean := True;
+              DataModule1.mPedido.Post;
+              DataModule1.mPedido.ApplyUpdates(-1);
+
+
+              {Registro Faturamento}
+              DataModule1.mFaturamento.Append;
+              DataModule1.mFaturamentoidFaturamento.AsInteger := DataModule1.buscaProximoParametro('SeqFaturamento');
+              DataModule1.mFaturamentoidPedido.AsInteger := Ds.DataSet.FieldByName('idPedido').AsInteger;
+              DataModule1.mFaturamentodata_faturamento.AsString := DateToStr(date);
+              DataModule1.mFaturamentonf.AsInteger := DataModule1.buscaProximoParametro('SeqNf');
+
+              {Salva}
+              DataModule1.mFaturamento.Post;
+              DataModule1.mFaturamento.ApplyUpdates(-1);
+
+              ShowMessage('Pedido Faturado! '+ #13
+                        + ' Cod Faturamento: ' + DataModule1.mFaturamentoidFaturamento.AsString       + #13
+                        + 'Cod Pedido: ' +  DataModule1.mFaturamentoidPedido.AsString                 + #13
+                        +'Data de Faturamento: ' + DataModule1.mFaturamentodata_faturamento.AsString  + #13
+                        +'NF: ' +  DataModule1.mFaturamentonf.AsString
+                        );
             end;
         end else
             ShowMessage('Pedido Já Faturado. Não Pode Ser Faturado Novamente.');
     end
     else
         ShowMessage('Não Há registros');
+  end;
+end;
+
+procedure TFPedido.btnCancelarClick(Sender: TObject);
+begin
+  inherited;
+  
+  btnFaturar.Enabled := true;
+end;
+
+procedure TFPedido.FormCreate(Sender: TObject);
+begin
+  inherited;
+  btnFaturar.Enabled := false;
+end;
+
+procedure TFPedido.btnPesquisarClick(Sender: TObject);
+begin
+  inherited;
+  btnFaturar.Enabled := true;
+end;
+
+procedure TFPedido.DBGrid2DblClick(Sender: TObject);
+var
+  texto : String;
+begin
+  inherited;
+
+  if DataModule1.DsPedidoItem.DataSet.Active then
+  begin
+  texto := InputBox('Alterar','Quantidade', DataModule1.mPedidoItemquantidade.AsString);
+  DataModule1.mPedidoItem.Edit;
+  
+  DataModule1.mPedidoItemquantidade.AsInteger := StrToInt(texto);
+  DataModule1.mPedidoItemprecoParcial.AsFloat := ((DataModule1.mPedidoItemquantidade.AsInteger)*(DataModule1.mPedidoItemprecoUnitario.AsFloat));
+  DataModule1.mPedidoItem.Post;
+  DataModule1.mPedidoItem.ApplyUpdates(-1);
+
+  {Altera Preço Total do Pedido}
+  DataModule1.qAux.Close;
+  DataModule1.qAux.SQL.Text := 'select SUM(precoParcial) as precototal from pedido_item where idPedido =:i';
+  DataModule1.qAux.ParamByName('i').AsString:=(DataModule1.mPedidoidPedido.AsString);
+  DataModule1.qAux.Open;
+  DataModule1.mPedidovalorTotal.AsFloat := DataModule1.qAux.FieldByName('precototal').AsFloat;
+
+  end;
+end;
+
+procedure TFPedido.DBGrid2KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+  if (key = 46) then
+  begin
+    if MessageDlg('Deseja Apagar Item Selecionado ?',mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+     begin
+        Datamodule1.mPedidoItem.Delete;
+        Datamodule1.mPedidoItem.ApplyUpdates(-1);
+
+        {Altera Preço Total do Pedido}
+        DataModule1.qAux.Close;
+        DataModule1.qAux.SQL.Text := 'select SUM(precoParcial) as precototal from pedido_item where idPedido =:i';
+        DataModule1.qAux.ParamByName('i').AsString:=(DataModule1.mPedidoidPedido.AsString);
+        DataModule1.qAux.Open;
+        DataModule1.mPedidovalorTotal.AsFloat := DataModule1.qAux.FieldByName('precototal').AsFloat;
+
+     end;
   end;
 end;
 

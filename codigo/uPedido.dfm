@@ -1,7 +1,7 @@
 inherited FPedido: TFPedido
-  Left = 192
-  Top = 88
-  Width = 755
+  Left = 248
+  Top = 83
+  Width = 749
   Height = 635
   Caption = 'FPedido'
   KeyPreview = True
@@ -9,11 +9,11 @@ inherited FPedido: TFPedido
   PixelsPerInch = 96
   TextHeight = 13
   inherited StatusBar1: TStatusBar
-    Top = 578
-    Width = 739
+    Top = 585
+    Width = 741
   end
   inherited ToolBar1: TToolBar
-    Width = 739
+    Width = 741
     ButtonWidth = 41
     inherited btnDeletar: TToolButton
       Left = 41
@@ -51,13 +51,13 @@ inherited FPedido: TFPedido
     end
   end
   inherited PageControl1: TPageControl
-    Width = 739
-    Height = 547
-    ActivePage = tbFiltros
+    Width = 741
+    Height = 554
+    ActivePage = tbDados
     inherited tbDados: TTabSheet
       inherited gbDados: TGroupBox
-        Width = 731
-        Height = 519
+        Width = 733
+        Height = 526
         object Label1: TLabel
           Left = 16
           Top = 24
@@ -175,6 +175,7 @@ inherited FPedido: TFPedido
             Height = 13
             Caption = 'idPedido'
             FocusControl = DBEdit7
+            Visible = False
           end
           object Label8: TLabel
             Left = 21
@@ -183,6 +184,7 @@ inherited FPedido: TFPedido
             Height = 13
             Caption = 'idProduto'
             FocusControl = DBEdit8
+            Visible = False
           end
           object Label9: TLabel
             Left = 21
@@ -191,6 +193,7 @@ inherited FPedido: TFPedido
             Height = 13
             Caption = 'quantidade'
             FocusControl = DBEdit9
+            Visible = False
           end
           object Label10: TLabel
             Left = 21
@@ -199,6 +202,7 @@ inherited FPedido: TFPedido
             Height = 13
             Caption = 'precoParcial'
             FocusControl = DBEdit10
+            Visible = False
           end
           object Label11: TLabel
             Left = 21
@@ -207,13 +211,7 @@ inherited FPedido: TFPedido
             Height = 13
             Caption = 'precoUnitario'
             FocusControl = DBEdit11
-          end
-          object SpeedButton1: TSpeedButton
-            Left = 144
-            Top = 312
-            Width = 23
-            Height = 22
-            OnClick = SpeedButton1Click
+            Visible = False
           end
           object GroupBox2: TGroupBox
             Left = 176
@@ -237,6 +235,8 @@ inherited FPedido: TFPedido
               TitleFont.Height = -11
               TitleFont.Name = 'MS Sans Serif'
               TitleFont.Style = []
+              OnDblClick = DBGrid2DblClick
+              OnKeyDown = DBGrid2KeyDown
               Columns = <
                 item
                   Expanded = False
@@ -303,6 +303,7 @@ inherited FPedido: TFPedido
             DataField = 'idPedido'
             ReadOnly = True
             TabOrder = 2
+            Visible = False
           end
           object DBEdit8: TDBEdit
             Left = 21
@@ -313,6 +314,7 @@ inherited FPedido: TFPedido
             DataField = 'idProduto'
             ReadOnly = True
             TabOrder = 3
+            Visible = False
           end
           object DBEdit9: TDBEdit
             Left = 21
@@ -322,6 +324,7 @@ inherited FPedido: TFPedido
             TabStop = False
             DataField = 'quantidade'
             TabOrder = 4
+            Visible = False
           end
           object DBEdit10: TDBEdit
             Left = 21
@@ -332,6 +335,7 @@ inherited FPedido: TFPedido
             DataField = 'precoParcial'
             ReadOnly = True
             TabOrder = 5
+            Visible = False
           end
           object DBEdit11: TDBEdit
             Left = 21
@@ -342,6 +346,7 @@ inherited FPedido: TFPedido
             DataField = 'precoUnitario'
             ReadOnly = True
             TabOrder = 6
+            Visible = False
           end
           object ed_vlTotal: TDBEdit
             Left = 21
@@ -366,11 +371,11 @@ inherited FPedido: TFPedido
     end
     inherited tbFiltros: TTabSheet
       inherited gbFiltros: TGroupBox
-        Width = 731
+        Width = 733
       end
       inherited DBGrid1: TDBGrid
-        Width = 731
-        Height = 454
+        Width = 733
+        Height = 461
         Columns = <
           item
             Expanded = False
@@ -481,10 +486,5 @@ inherited FPedido: TFPedido
         Name = 'PVlTotal'
         ParamType = ptUnknown
       end>
-  end
-  object Timer1: TTimer
-    Enabled = False
-    Left = 537
-    Top = 63
   end
 end
