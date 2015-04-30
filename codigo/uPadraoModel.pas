@@ -51,6 +51,7 @@ type
     function isCPF(Field : TDBEdit): boolean;
     function isCNPJ(Field : TDBEdit): boolean;
     function isEMail(Field : TDBEdit): Boolean;
+    function isEmpty: Boolean;
   private
     procedure StatusBotoes(e: integer);
     { Private declarations }
@@ -142,6 +143,7 @@ end;
 
 procedure TFormPadrao.btnSalvarClick(Sender: TObject);
 begin
+  if not isEmpty then
     ds.DataSet.Post;
 end;
 
@@ -390,6 +392,50 @@ begin
  end
  else
    Result := False;
+end;
+
+function TFormPadrao.isEmpty: Boolean;
+var
+  I: Integer;
+
+begin
+
+  for I := 0 to ComponentCount - 1 do
+
+  begin
+
+    if Components[I].ClassType = TDBEdit then
+
+    if TDBEdit(Components[I]).Text = '' then
+
+    begin
+
+      Result := true;
+
+      TDBEdit(Components[I]).Hint := 'Campo Obrigatório';
+      TDBEdit(Components[I]).SetFocus;
+
+      Exit;
+
+    end;
+
+    if Components[I].ClassType = TDBLookupComboBox then
+
+    if TDBLookupComboBox(Components[I]).Text = '' then
+
+    begin
+
+      Result := true;
+
+      TDBLookupComboBox(Components[I]).Hint := 'Campo Obrigatório';
+      TDBLookupComboBox(Components[I]).SetFocus;
+
+      Exit;
+
+    end;
+
+  end;
+
 end;
 
 end.
