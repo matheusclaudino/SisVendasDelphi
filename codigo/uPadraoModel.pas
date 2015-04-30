@@ -50,6 +50,7 @@ type
     function isData(Field : TDBEdit) : Boolean;
     function isCPF(Field : TDBEdit): boolean;
     function isCNPJ(Field : TDBEdit): boolean;
+    function isEMail(Field : TDBEdit): Boolean;
   private
     procedure StatusBotoes(e: integer);
     { Private declarations }
@@ -374,5 +375,21 @@ var
 			isCNPJ := false
 		end; 
 	end;
+
+function TFormPadrao.isEMail(Field : TDBEdit): Boolean;
+var
+  aStr: string;
+
+begin
+  aStr := Field.Text;
+  aStr := Trim(UpperCase(aStr));
+ if Pos('@', aStr) > 1 then
+ begin
+   Delete(aStr, 1, pos('@', aStr));
+   Result := (Length(aStr) > 0) and (Pos('.', aStr) > 2);
+ end
+ else
+   Result := False;
+end;
 
 end.
