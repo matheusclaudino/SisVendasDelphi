@@ -48,6 +48,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure ExportarExcel(dado: TClientDataSet);
     function isData(Field : TDBEdit) : Boolean;
+    function isCPF(Field : TDBEdit): boolean;
   private
     procedure StatusBotoes(e: integer);
     { Private declarations }
@@ -252,5 +253,64 @@ begin
     end;
 end;
 
+function TFormPadrao.isCPF(Field : TDBEdit): boolean;
+var
+	dig10, dig11: string;
+	s, i, r, peso: integer;
+
+	begin
+	// length - retorna o tamanho da string (CPF é um número formado por 11 dígitos)
+
+		if ((Field.Text = '00000000000') or (Field.Text = '11111111111') or
+		(Field.Text = '22222222222') or (Field.Text = '33333333333') or
+		(Field.Text = '44444444444') or (Field.Text = '55555555555') or
+		(Field.Text = '66666666666') or (Field.Text = '77777777777') or
+		(Field.Text = '88888888888') or (Field.Text = '99999999999') or
+		(length(Field.Text) <> 11)) then
+		begin
+			isCPF := false;
+			exit;
+		end;
+		// try - protege o código para eventuais erros de conversão de tipo na função StrToInt
+		try
+{ *-- Cálculo do 1o. Digito Verificador --* }
+			s := 0;
+			peso := 10;
+			for i := 1 to 9 do
+			begin
+			// StrToInt converte o i-ésimo caractere do CPF em um número
+				s := s + (StrToInt(Field.Text[i]) * peso);
+				peso := peso - 1;
+			end;
+			r := 11 - (s mod 11);
+			if ((r = 10) or (r = 11)) then
+				dig10 := '0'
+			else
+				str(r:1, dig10); // converte um número no respectivo caractere numérico
+
+{ *-- Cálculo do 2o. Digito Verificador --* }
+			s := 0;
+			peso := 11;
+			for i := 1 to 10 do
+			begin
+				s := s + (StrToInt(Field.Text[i]) * peso);
+				peso := peso - 1;
+			end;
+			r := 11 - (s mod 11);
+			if ((r = 10) or (r = 11)) then
+				dig11 := '0'
+			else
+				str(r:1, dig11);
+
+{ Verifica se os digitos calculados conferem com os digitos informados. }
+			if ((dig10 = Field.Text[10]) and (dig11 = Field.Text[11])) then
+				isCPF := true
+			else
+				isCPF := false;
+		except
+			isCPF := false
+		end;
+
+	end;
 
 end.
