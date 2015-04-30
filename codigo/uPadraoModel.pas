@@ -47,6 +47,7 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormCreate(Sender: TObject);
     procedure ExportarExcel(dado: TClientDataSet);
+    function isData(Field : TDBEdit) : Boolean;
   private
     procedure StatusBotoes(e: integer);
     { Private declarations }
@@ -237,5 +238,19 @@ var
 		planilha.Columns.AutoFit;
 
 end;
+
+function TFormPadrao.isData(Field : TDBEdit) : Boolean;
+var
+   Data : String;
+begin
+    Data := Copy(Field.Text,1,2) + '/' + Copy(Field.Text,3,2) + '/' + Copy(Field.Text,5,4);
+    try
+       StrToDate(Data);
+       Result := True;
+    except
+       Result := False;
+    end;
+end;
+
 
 end.
