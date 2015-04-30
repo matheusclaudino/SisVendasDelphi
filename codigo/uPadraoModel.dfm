@@ -146,6 +146,7 @@ object FormPadrao: TFormPadrao
           Top = 16
           Width = 25
           Height = 25
+          Hint = 'Exportar Excel'
           TabOrder = 0
           Glyph.Data = {
             A2070000424DA207000000000000360000002800000019000000190000000100

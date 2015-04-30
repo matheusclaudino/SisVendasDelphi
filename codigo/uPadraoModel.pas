@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, jpeg, ExtCtrls, ComCtrls, ToolWin, uConexao, DB, StdCtrls,
-  Grids, DBGrids, DBCtrls, Buttons;
+  Grids, DBGrids, DBCtrls, Buttons, ComObj, DBClient;
 
 type
   TFormPadrao = class(TForm)
@@ -46,6 +46,7 @@ type
     procedure btnUltimoClick(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormCreate(Sender: TObject);
+    procedure ExportarExcel(dado: TClientDataSet);
   private
     procedure StatusBotoes(e: integer);
     { Private declarations }
@@ -201,6 +202,40 @@ end;
 procedure TFormPadrao.FormCreate(Sender: TObject);
 begin
   KeyPreview:=true;
+end;
+
+procedure TFormPadrao.ExportarExcel(dado: TClientDataSet);
+var
+	 	linha, coluna: integer;
+	 	planilha: variant;
+	 	valorCampo: string;
+	begin
+  inherited;
+    planilha := CreateOleObject ('Excel.Application');
+		planilha.Workbooks.add(1);
+		planilha.Cells.Select;
+		planilha.Selection.NumberFormat := '@';
+		planilha.Caption := 'Exportação de dados para o excel';
+		planilha.Visible := True;
+		dado.First;
+
+		for linha := 0 to dado.RecordCount -1 do
+		begin
+			for coluna := 1 to dado.FieldCount do
+			begin
+				valorCampo := dado.Fields[coluna-1].AsString;
+				planilha.Cells[linha+2, coluna] := valorCampo;
+			end;
+			dado.Next;
+		end;
+
+		for coluna := 1 to dado.FieldCount do
+		begin
+			valorCampo := dado.Fields[coluna-1].DisplayLabel;
+			planilha.Cells[1, coluna] := valorCampo;
+		end;
+		planilha.Columns.AutoFit;
+
 end;
 
 end.
