@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, jpeg, ExtCtrls, ComCtrls, ToolWin, uConexao, DB, StdCtrls,
-  Grids, DBGrids, DBCtrls;
+  Grids, DBGrids, DBCtrls, Buttons;
 
 type
   TFormPadrao = class(TForm)
@@ -28,6 +28,7 @@ type
     gbFiltros: TGroupBox;
     DBGrid1: TDBGrid;
     gbDados: TGroupBox;
+    BitBtn1: TBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
