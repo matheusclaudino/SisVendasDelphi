@@ -11,7 +11,11 @@ uses
   uProduto in 'uProduto.pas' {FProduto},
   uUsuario in 'uUsuario.pas' {FUsuario},
   UEntradaEstoque in 'UEntradaEstoque.pas' {FEntradaEstoque},
-  uConta in 'uConta.pas' {FConta};
+  uConta in 'uConta.pas' {FConta},
+  uConsultas in 'uConsultas.pas' {FConsultas},
+  uConsultaContas in 'uConsultaContas.pas' {FConsultaContas},
+  uConsultaClientes in 'uConsultaClientes.pas' {FConsultaClientes};
+
 {$R *.res}
 
 begin
@@ -27,5 +31,8 @@ begin
   Application.CreateForm(TFEntradaEstoque, FEntradaEstoque);
   Application.CreateForm(TFConta, FConta);
   Application.CreateForm(TFEntradaEstoque, FEntradaEstoque);
+  Application.CreateForm(TFConsultas, FConsultas);
+  Application.CreateForm(TFConsultaContas, FConsultaContas);
+  Application.CreateForm(TFConsultaClientes, FConsultaClientes);
   Application.Run;
 end.

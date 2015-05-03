@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uPadraoModel, DB, Grids, DBGrids, StdCtrls, ComCtrls, ToolWin, uConexao,
-  Mask, DBCtrls, Buttons;
+  Mask, DBCtrls;
 
 type
   TFCidade = class(TFormPadrao)
@@ -15,7 +15,6 @@ type
     DBEdit2: TDBEdit;
     Label3: TLabel;
     DBEdit3: TDBEdit;
-    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -28,11 +27,5 @@ var
 implementation
 
 {$R *.dfm}
-
-procedure TFCidade.BitBtn1Click(Sender: TObject);
-begin
-  inherited;
-  ExportarExcel(DataModule1.mCidade);
-end;
 
 end.

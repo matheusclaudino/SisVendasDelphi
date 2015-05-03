@@ -1,6 +1,6 @@
 object FormPadrao: TFormPadrao
-  Left = 398
-  Top = 291
+  Left = 304
+  Top = 138
   Width = 928
   Height = 515
   AlphaBlend = True
@@ -23,15 +23,15 @@ object FormPadrao: TFormPadrao
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 458
-    Width = 912
+    Top = 465
+    Width = 920
     Height = 19
     Panels = <>
   end
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 912
+    Width = 920
     Height = 31
     ButtonHeight = 27
     Caption = 'ToolBar1'
@@ -113,9 +113,9 @@ object FormPadrao: TFormPadrao
   object PageControl1: TPageControl
     Left = 0
     Top = 31
-    Width = 912
-    Height = 427
-    ActivePage = tbDados
+    Width = 920
+    Height = 434
+    ActivePage = tbFiltros
     Align = alClient
     TabOrder = 2
     object tbDados: TTabSheet
@@ -123,8 +123,8 @@ object FormPadrao: TFormPadrao
       object gbDados: TGroupBox
         Left = 0
         Top = 0
-        Width = 904
-        Height = 399
+        Width = 912
+        Height = 406
         Align = alClient
         Color = clBtnFace
         ParentColor = False
@@ -137,12 +137,12 @@ object FormPadrao: TFormPadrao
       object gbFiltros: TGroupBox
         Left = 0
         Top = 0
-        Width = 904
+        Width = 912
         Height = 65
         Align = alTop
         TabOrder = 0
         object BitBtn1: TBitBtn
-          Left = 872
+          Left = 8
           Top = 16
           Width = 25
           Height = 25
@@ -216,8 +216,8 @@ object FormPadrao: TFormPadrao
       object DBGrid1: TDBGrid
         Left = 0
         Top = 65
-        Width = 904
-        Height = 334
+        Width = 912
+        Height = 341
         Align = alClient
         DataSource = DS
         TabOrder = 1

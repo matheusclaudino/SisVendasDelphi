@@ -95,13 +95,6 @@ inherited FUsuario: TFUsuario
         end
       end
     end
-    inherited tbFiltros: TTabSheet
-      inherited gbFiltros: TGroupBox
-        inherited BitBtn1: TBitBtn
-          OnClick = BitBtn1Click
-        end
-      end
-    end
   end
   inherited DS: TDataSource
     DataSet = DataModule1.mUsuario

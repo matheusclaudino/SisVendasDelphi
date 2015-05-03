@@ -1,10 +1,24 @@
 inherited FConta: TFConta
-  Left = 397
-  Top = 231
+  Left = 366
+  Top = 91
   Caption = 'FConta'
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
+  inherited ToolBar1: TToolBar
+    inherited btnNovo: TToolButton
+      Visible = False
+    end
+    inherited btnAlterar: TToolButton
+      Visible = False
+    end
+    inherited btnCancelar: TToolButton
+      Visible = False
+    end
+    inherited btnSalvar: TToolButton
+      Visible = False
+    end
+  end
   inherited PageControl1: TPageControl
     inherited tbDados: TTabSheet
       inherited gbDados: TGroupBox
@@ -104,13 +118,6 @@ inherited FConta: TFConta
           DataField = 'idFaturamento'
           DataSource = DS
           TabOrder = 5
-        end
-      end
-    end
-    inherited tbFiltros: TTabSheet
-      inherited gbFiltros: TGroupBox
-        inherited BitBtn1: TBitBtn
-          OnClick = BitBtn1Click
         end
       end
     end

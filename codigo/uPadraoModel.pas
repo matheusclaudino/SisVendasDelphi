@@ -143,7 +143,6 @@ end;
 
 procedure TFormPadrao.btnSalvarClick(Sender: TObject);
 begin
-  if not isEmpty then
     ds.DataSet.Post;
 end;
 

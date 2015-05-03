@@ -20,7 +20,6 @@ type
     DBEdit4: TDBEdit;
     Label5: TLabel;
     DBEdit5: TDBEdit;
-    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,11 +32,5 @@ var
 implementation
 
 {$R *.dfm}
-
-procedure TFConta.BitBtn1Click(Sender: TObject);
-begin
-  inherited;
-  ExportarExcel(DataModule1.mConta);
-end;
 
 end.

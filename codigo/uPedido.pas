@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uPadraoModel, DB, Grids, DBGrids, StdCtrls, ComCtrls, ToolWin, uConexao,
-  Mask, DBCtrls, ExtCtrls, DBTables, Provider, DBClient, Buttons;
+  Mask, DBCtrls, ExtCtrls, DBTables, Provider, DBClient, Buttons, DateUtils;
 
 type
   TFPedido = class(TFormPadrao)
@@ -45,7 +45,6 @@ type
     qProdutoean: TFloatField;
     qValorTotal: TQuery;
     ed_vlTotal: TDBEdit;
-    ed_tecla: TEdit;
     btnFaturar: TToolButton;
     procedure ed_barraKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -63,6 +62,7 @@ type
     procedure DBGrid2DblClick(Sender: TObject);
     procedure DBGrid2KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -198,6 +198,9 @@ begin
 end;
 
 procedure TFPedido.btnFaturarClick(Sender: TObject);
+var
+data : tdatetime;
+prazo : integer;
 begin
   inherited;
   if ds.DataSet.Active then
@@ -213,6 +216,8 @@ begin
               {Abre Edição}
               if not DataModule1.mFaturamento.Active then
                   DataModule1.mFaturamento.Open;
+              if not DataModule1.mConta.Active then
+                  DataModule1.mConta.Open;
 
               {Alteração do Status do Pedido}
               DataModule1.mPedido.Edit;
@@ -228,7 +233,26 @@ begin
               DataModule1.mFaturamentodata_faturamento.AsString := DateToStr(date);
               DataModule1.mFaturamentonf.AsInteger := DataModule1.buscaProximoParametro('SeqNf');
 
-              {Salva}
+              {Registro Conta a Receber}
+              DataModule1.mConta.Append;
+              DataModule1.mContaidConta.AsInteger := DataModule1.buscaProximoParametro('SeqConta');
+              DataModule1.mContastatusPag.AsBoolean := false;
+              DataModule1.mContaidFaturamento.AsInteger := DataModule1.mFaturamentoidFaturamento.AsInteger;
+              DataModule1.mContanumero_duplicata.AsString := IntToStr(DataModule1.mContaidConta.AsInteger);
+
+              DataModule1.qAux.SQL.Text := 'select prazoPagamento from pedido where pedido.idPedido = :i';
+              DataModule1.qAux.ParamByName('i').AsInteger:= (DataModule1.mFaturamentoidPedido.AsInteger);
+              DataModule1.qAux.Open;
+              prazo := DataModule1.qAux.FieldByName('prazoPagamento').AsInteger;
+              data := IncDay(date, prazo);
+              DataModule1.mContadata_venc.AsString := DateToStr(data);
+
+              {Salva Conta A Receber}
+              DataModule1.mConta.Post;
+              DataModule1.mConta.ApplyUpdates(-1);
+              
+
+              {Salva Faturamento}
               DataModule1.mFaturamento.Post;
               DataModule1.mFaturamento.ApplyUpdates(-1);
 
@@ -312,6 +336,12 @@ begin
 
      end;
   end;
+end;
+
+procedure TFPedido.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  ExportarExcel(DataModule1.mPedido);
 end;
 
 end.

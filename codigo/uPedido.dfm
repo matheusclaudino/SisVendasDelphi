@@ -1,6 +1,6 @@
 inherited FPedido: TFPedido
-  Left = 681
-  Top = 240
+  Left = 248
+  Top = 83
   Width = 749
   Height = 635
   Caption = 'FPedido'
@@ -9,11 +9,11 @@ inherited FPedido: TFPedido
   PixelsPerInch = 96
   TextHeight = 13
   inherited StatusBar1: TStatusBar
-    Top = 578
-    Width = 733
+    Top = 585
+    Width = 741
   end
   inherited ToolBar1: TToolBar
-    Width = 733
+    Width = 741
     ButtonWidth = 41
     inherited btnDeletar: TToolButton
       Left = 41
@@ -51,13 +51,12 @@ inherited FPedido: TFPedido
     end
   end
   inherited PageControl1: TPageControl
-    Width = 733
-    Height = 547
-    ActivePage = tbDados
+    Width = 741
+    Height = 554
     inherited tbDados: TTabSheet
       inherited gbDados: TGroupBox
-        Width = 725
-        Height = 519
+        Width = 733
+        Height = 526
         object Label1: TLabel
           Left = 16
           Top = 24
@@ -359,23 +358,15 @@ inherited FPedido: TFPedido
             OnEnter = ed_vlTotalEnter
           end
         end
-        object ed_tecla: TEdit
-          Left = 280
-          Top = 32
-          Width = 121
-          Height = 21
-          TabOrder = 7
-          OnKeyDown = ed_teclaKeyDown
-        end
       end
     end
     inherited tbFiltros: TTabSheet
       inherited gbFiltros: TGroupBox
-        Width = 725
+        Width = 733
       end
       inherited DBGrid1: TDBGrid
-        Width = 725
-        Height = 454
+        Width = 733
+        Height = 461
         Columns = <
           item
             Expanded = False

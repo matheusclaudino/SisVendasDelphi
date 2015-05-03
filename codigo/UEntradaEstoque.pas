@@ -5,8 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uPadraoModel, DB, Grids, DBGrids, StdCtrls, ComCtrls, ToolWin, uConexao,
-  DBCtrls, Mask, ExtCtrls, DBTables,
-  Buttons;
+  DBCtrls, Mask, ExtCtrls, DBTables;
 
 type
   TFEntradaEstoque = class(TFormPadrao)
@@ -32,7 +31,6 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure eEanKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -90,17 +88,12 @@ begin
 
   end else
   begin
-
     ShowMessage('Código de barra não encontrado.');
     eEan.SetFocus;
   end;
   END;
-end;
 
-procedure TFEntradaEstoque.BitBtn1Click(Sender: TObject);
-begin
-  inherited;
-  ExportarExcel(DataModule1.mEntrada);
+
 end;
 
 end.

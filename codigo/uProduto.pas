@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uPadraoModel, DB, Grids, DBGrids, StdCtrls, ComCtrls, ToolWin, uConexao,
-  DBCtrls, Mask, ComObj, Buttons, DBClient;
+  DBCtrls, Mask, Buttons;
 
 type
   TFProduto = class(TFormPadrao)
@@ -33,7 +33,6 @@ var
 implementation
 
 {$R *.dfm}
-
 
 procedure TFProduto.BitBtn1Click(Sender: TObject);
 begin
