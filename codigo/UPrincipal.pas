@@ -119,7 +119,7 @@ end;
 procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   mLog.Lines.Add('HORA: ' + FormatDateTime('hh:mm:ss',now) + ' SAIU DO SISTEMA');
-  mLog.Lines.SaveToFile('C:\Users\Matheus Claudino\Desktop\'+DataModule1.qLoginusername.AsString+'log.txt');
+  mLog.Lines.SaveToFile('log\'+DataModule1.qLoginusername.AsString+'log.txt');
   Application.Terminate;
 end;
 
