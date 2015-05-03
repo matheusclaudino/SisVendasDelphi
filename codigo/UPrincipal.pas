@@ -32,6 +32,7 @@ type
     procedure imgEntradaEstoqueClick(Sender: TObject);
     procedure imgContasClick(Sender: TObject);
     procedure Image10Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
 
   private
     { Private declarations }
@@ -97,6 +98,11 @@ end;
 procedure TForm1.Image10Click(Sender: TObject);
 begin
   FConsultas.Show;
+end;
+
+procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Application.Terminate;
 end;
 
 end.
