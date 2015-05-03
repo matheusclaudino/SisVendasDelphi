@@ -1,12 +1,11 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
-  Left = 518
-  Top = 139
-  Height = 395
-  Width = 699
+  Left = 532
+  Top = 145
+  Height = 347
+  Width = 807
   object dbSisVenda: TDatabase
     AliasName = 'SistemaDeVendas'
-    Connected = True
     DatabaseName = 'SistemaDeVendas'
     KeepConnection = False
     LoginPrompt = False
@@ -27,7 +26,7 @@ object DataModule1: TDataModule1
       'ENABLE BCD=FALSE'
       'ROWSET SIZE=20'
       'BLOBS TO CACHE=64'
-      'PASSWORD=123')
+      'PASSWORD=04242404')
     SessionName = 'Default'
     Left = 8
     Top = 8
@@ -36,7 +35,7 @@ object DataModule1: TDataModule1
     Left = 72
     Top = 8
     Bitmap = {
-      494C01010C000E00040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C01010C000E00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -568,7 +567,8 @@ object DataModule1: TDataModule1
       8000E007E00080028001C003E000C00000008003E000800101008001E0008260
       01000001E000024001800001E000018009A00001E000030001000001E0000040
       80000001E000846000018001C0008001C00180038000C003C003C00700014003
-      F00BE00F0003D00FD417F83F0007C41F}
+      F00BE00F0003D00FD417F83F0007C41F00000000000000000000000000000000
+      000000000000}
   end
   object qCliente: TQuery
     DatabaseName = 'SistemaDeVendas'
@@ -973,7 +973,6 @@ object DataModule1: TDataModule1
     Top = 184
   end
   object qUsuario: TQuery
-    Active = True
     DatabaseName = 'SistemaDeVendas'
     SQL.Strings = (
       'select * from Usuario')
@@ -1400,6 +1399,50 @@ object DataModule1: TDataModule1
   object pEntradaEan: TDataSetProvider
     DataSet = qEntradaEan
     Left = 584
+    Top = 184
+  end
+  object qLogin: TQuery
+    DatabaseName = 'SistemaDeVendas'
+    SQL.Strings = (
+      'select * from usuario')
+    Left = 648
+    Top = 64
+    object qLoginidUsuario: TIntegerField
+      FieldName = 'idUsuario'
+      Origin = 'SISTEMADEVENDAS.usuario.idUsuario'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object qLoginnome: TStringField
+      FieldName = 'nome'
+      Origin = 'SISTEMADEVENDAS.usuario.nome'
+      Size = 50
+    end
+    object qLoginsenha: TStringField
+      FieldName = 'senha'
+      Origin = 'SISTEMADEVENDAS.usuario.senha'
+      Size = 50
+    end
+    object qLoginemail: TStringField
+      FieldName = 'email'
+      Origin = 'SISTEMADEVENDAS.usuario.email'
+      Size = 50
+    end
+    object qLoginusername: TStringField
+      FieldName = 'username'
+      Origin = 'SISTEMADEVENDAS.usuario.username'
+      Size = 50
+    end
+  end
+  object mLogin: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'pLogin'
+    Left = 648
+    Top = 128
+  end
+  object pLogin: TDataSetProvider
+    DataSet = qLogin
+    Left = 648
     Top = 184
   end
 end

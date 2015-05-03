@@ -164,6 +164,14 @@ type
     qEntradaidUsuario: TIntegerField;
     mEntradaidUsuario: TIntegerField;
     mEntradausuario: TStringField;
+    qLogin: TQuery;
+    mLogin: TClientDataSet;
+    pLogin: TDataSetProvider;
+    qLoginidUsuario: TIntegerField;
+    qLoginnome: TStringField;
+    qLoginsenha: TStringField;
+    qLoginemail: TStringField;
+    qLoginusername: TStringField;
 
     procedure mClienteAfterPost(DataSet: TDataSet);
     procedure mClienteAfterDelete(DataSet: TDataSet);
