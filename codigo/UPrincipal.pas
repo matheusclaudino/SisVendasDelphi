@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, XPMan, ComCtrls, ToolWin, jpeg, Buttons;
+  Dialogs, ExtCtrls, XPMan, ComCtrls, ToolWin, jpeg, Buttons,
+  StdCtrls, AppEvnts;
 
 type
   TForm1 = class(TForm)
@@ -23,6 +24,8 @@ type
     imgEntradaEstoque: TImage;
     Image10: TImage;
     imgCidade: TImage;
+    AELog: TApplicationEvents;
+    mLog: TMemo;
     procedure FormShow(Sender: TObject);
     procedure imgClienteClick(Sender: TObject);
     procedure imgCidadeClick(Sender: TObject);
@@ -33,6 +36,7 @@ type
     procedure imgContasClick(Sender: TObject);
     procedure Image10Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure AELogMessage(var Msg: tagMSG; var Handled: Boolean);
 
   private
     { Private declarations }
@@ -48,16 +52,28 @@ var
 implementation
 
 Uses  uPadraoModel, UCliente, uCidade, uPedido, uProduto, uUsuario, UEntradaEstoque,
-  uConta, uConsultas;
+  uConta, uConsultas,
+  uConexao;
 
 
 {$R *.dfm}
 
 procedure TForm1.FormShow(Sender: TObject);
 begin
+   mLog.Lines.Add('DATA: ' + FormatDateTime('dd/mm/yyyy',date) + ' ENTROU NO SISTEMA.');
+  if(DataModule1.qLoginnivel.AsInteger = 2) then
+  begin
+     imgUsuario.Enabled := False;
+     imgUsuario.Visible := False;
+  end
+  else if(DataModule1.qLoginnivel.AsInteger = 3) then
+  begin
+    imgUsuario.Enabled := False;
+    imgEntradaEstoque.Enabled := False;
+  end;
   {Aplica Tela Cheia ao Form}
   ShowWindow(Handle, SW_MAXIMIZE);
-
+  ShowMessage(DataModule1.qLoginnome.AsString + ' Bem vindo ao Real System!!!');
 end;
 
 procedure TForm1.imgClienteClick(Sender: TObject);
@@ -102,7 +118,26 @@ end;
 
 procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  mLog.Lines.Add('HORA: ' + FormatDateTime('hh:mm:ss',now) + ' SAIU DO SISTEMA');
+  mLog.Lines.SaveToFile('C:\Users\Matheus Claudino\Desktop\'+DataModule1.qLoginusername.AsString+'log.txt');
   Application.Terminate;
 end;
+
+procedure TForm1.AELogMessage(var Msg: tagMSG; var Handled: Boolean);
+var
+  Componente: TWinControl;
+begin
+
+  Case Msg.message of
+	  WM_LBUTTONUP:
+	  begin
+	    Componente := FindVCLWindow(Mouse.CursorPos);
+          mLog.Lines.Add('HORA: ' + FormatDateTime('hh:mm:ss ',now) +
+          DataModule1.qLoginusername.AsString + ' Interagiu com o ' + Componente.Name);
+		    //Showmessage('Classe: ' + Componente.ClassName + ' - Nome: ' + Componente.Name  );
+	  end;
+  end;//fim case
+end;
+
 
 end.

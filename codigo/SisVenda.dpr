@@ -14,12 +14,14 @@ uses
   uConta in 'uConta.pas' {FConta},
   uConsultas in 'uConsultas.pas' {FConsultas},
   uConsultaContas in 'uConsultaContas.pas' {FConsultaContas},
-  uConsultaClientes in 'uConsultaClientes.pas' {FConsultaClientes};
+  uConsultaClientes in 'uConsultaClientes.pas' {FConsultaClientes},
+  uLogin in 'uLogin.pas' {FLogin};
 
 {$R *.res}
 
 begin
   Application.Initialize;
+  Application.CreateForm(TFLogin, FLogin);
   Application.CreateForm(TForm1, Form1);
   Application.CreateForm(TDataModule1, DataModule1);
   Application.CreateForm(TFormPadrao, FormPadrao);

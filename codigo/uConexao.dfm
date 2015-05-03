@@ -1,7 +1,7 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
-  Left = 532
-  Top = 145
+  Left = 644
+  Top = 251
   Height = 347
   Width = 807
   object dbSisVenda: TDatabase
@@ -1007,6 +1007,11 @@ object DataModule1: TDataModule1
       ProviderFlags = [pfInUpdate]
       Size = 50
     end
+    object qUsuarionivel: TIntegerField
+      FieldName = 'nivel'
+      Origin = 'SISTEMADEVENDAS.Usuario.nivel'
+      ProviderFlags = [pfInUpdate]
+    end
   end
   object mUsuario: TClientDataSet
     Aggregates = <>
@@ -1020,6 +1025,7 @@ object DataModule1: TDataModule1
     Top = 128
     object mUsuarioidUsuario: TIntegerField
       FieldName = 'idUsuario'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
     end
     object mUsuarionome: TStringField
       FieldName = 'nome'
@@ -1036,6 +1042,20 @@ object DataModule1: TDataModule1
     object mUsuariousername: TStringField
       FieldName = 'username'
       Size = 50
+    end
+    object mUsuarionivel: TIntegerField
+      FieldName = 'nivel'
+      ProviderFlags = [pfInUpdate]
+    end
+    object mUsuarioNivelUsuario: TStringField
+      FieldKind = fkLookup
+      FieldName = 'NivelUsuario'
+      LookupDataSet = qNivel
+      LookupKeyFields = 'idNivel'
+      LookupResultField = 'descricao'
+      KeyFields = 'nivel'
+      Size = 25
+      Lookup = True
     end
   end
   object pUsuario: TDataSetProvider
@@ -1415,22 +1435,31 @@ object DataModule1: TDataModule1
     object qLoginnome: TStringField
       FieldName = 'nome'
       Origin = 'SISTEMADEVENDAS.usuario.nome'
+      ProviderFlags = [pfInUpdate]
       Size = 50
     end
     object qLoginsenha: TStringField
       FieldName = 'senha'
       Origin = 'SISTEMADEVENDAS.usuario.senha'
+      ProviderFlags = [pfInUpdate]
       Size = 50
     end
     object qLoginemail: TStringField
       FieldName = 'email'
       Origin = 'SISTEMADEVENDAS.usuario.email'
+      ProviderFlags = [pfInUpdate]
       Size = 50
     end
     object qLoginusername: TStringField
       FieldName = 'username'
       Origin = 'SISTEMADEVENDAS.usuario.username'
+      ProviderFlags = [pfInUpdate]
       Size = 50
+    end
+    object qLoginnivel: TIntegerField
+      FieldName = 'nivel'
+      Origin = 'SISTEMADEVENDAS.usuario.nivel'
+      ProviderFlags = [pfInUpdate]
     end
   end
   object mLogin: TClientDataSet
@@ -1444,5 +1473,23 @@ object DataModule1: TDataModule1
     DataSet = qLogin
     Left = 648
     Top = 184
+  end
+  object qNivel: TQuery
+    DatabaseName = 'SistemaDeVendas'
+    SQL.Strings = (
+      'select * from nivel')
+    Left = 712
+    Top = 64
+    object qNivelidNivel: TIntegerField
+      FieldName = 'idNivel'
+      Origin = 'SISTEMADEVENDAS.nivel.idNivel'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object qNiveldescricao: TStringField
+      FieldName = 'descricao'
+      Origin = 'SISTEMADEVENDAS.nivel.descricao'
+      ProviderFlags = [pfInUpdate]
+      Size = 25
+    end
   end
 end

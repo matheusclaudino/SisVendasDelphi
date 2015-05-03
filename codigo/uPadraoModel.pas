@@ -116,6 +116,19 @@ end;
 procedure TFormPadrao.FormShow(Sender: TObject);
 begin
     StatusBotoes(2);
+
+    if(DataModule1.qLoginnivel.AsInteger = 2) then
+    begin
+      
+    end
+    else if(DataModule1.qLoginnivel.AsInteger = 3) then
+    begin
+
+    end
+    else if(DataModule1.qLoginnivel.AsInteger = 4) then
+    begin
+    
+    end;
 end;
 
 procedure TFormPadrao.btnNovoClick(Sender: TObject);

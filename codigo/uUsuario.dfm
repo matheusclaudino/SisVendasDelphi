@@ -1,11 +1,12 @@
 inherited FUsuario: TFUsuario
-  Left = 261
-  Top = 89
+  Left = 426
+  Top = 221
   Caption = 'FUsuario'
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited PageControl1: TPageControl
+    ActivePage = tbDados
     inherited tbDados: TTabSheet
       inherited gbDados: TGroupBox
         object Label1: TLabel
@@ -47,6 +48,22 @@ inherited FUsuario: TFUsuario
           Height = 13
           Caption = 'username'
           FocusControl = DBEdit5
+        end
+        object Label6: TLabel
+          Left = 64
+          Top = 232
+          Width = 48
+          Height = 13
+          Caption = 'Descri'#231#227'o'
+          FocusControl = DBLookupComboBox1
+        end
+        object Label7: TLabel
+          Left = 24
+          Top = 232
+          Width = 26
+          Height = 13
+          Caption = 'N'#237'vel'
+          FocusControl = DBEidNivel
         end
         object DBEdit1: TDBEdit
           Left = 24
@@ -92,6 +109,26 @@ inherited FUsuario: TFUsuario
           DataField = 'username'
           DataSource = DS
           TabOrder = 4
+        end
+        object DBLookupComboBox1: TDBLookupComboBox
+          Left = 64
+          Top = 248
+          Width = 339
+          Height = 21
+          DataField = 'NivelUsuario'
+          DataSource = DS
+          TabOrder = 5
+        end
+        object DBEidNivel: TDBEdit
+          Left = 24
+          Top = 248
+          Width = 41
+          Height = 21
+          Color = 15790320
+          DataField = 'nivel'
+          DataSource = DS
+          ReadOnly = True
+          TabOrder = 6
         end
       end
     end
