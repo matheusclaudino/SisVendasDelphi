@@ -116,18 +116,12 @@ end;
 procedure TFormPadrao.FormShow(Sender: TObject);
 begin
     StatusBotoes(2);
-
-    if(DataModule1.qLoginnivel.AsInteger = 2) then
+    if(DataModule1.qLoginnivel.AsInteger = 4) then
     begin
-      
-    end
-    else if(DataModule1.qLoginnivel.AsInteger = 3) then
-    begin
-
-    end
-    else if(DataModule1.qLoginnivel.AsInteger = 4) then
-    begin
-    
+      btnNovo.Visible := False;
+      btnDeletar.Visible := False;
+      btnAlterar.Visible := False;
+      btnSalvar.Visible := False;
     end;
 end;
 

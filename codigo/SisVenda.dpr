@@ -15,7 +15,8 @@ uses
   uConsultas in 'uConsultas.pas' {FConsultas},
   uConsultaContas in 'uConsultaContas.pas' {FConsultaContas},
   uConsultaClientes in 'uConsultaClientes.pas' {FConsultaClientes},
-  uLogin in 'uLogin.pas' {FLogin};
+  uLogin in 'uLogin.pas' {FLogin},
+  uMailSMTP in 'uMailSMTP.pas';
 
 {$R *.res}
 
