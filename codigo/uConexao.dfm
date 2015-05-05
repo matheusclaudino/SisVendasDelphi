@@ -1495,6 +1495,12 @@ object DataModule1: TDataModule1
   object qRecalcular: TQuery
     DatabaseName = 'SistemaDeVendas'
     Left = 712
-    Top = 136
+    Top = 128
+  end
+  object spRecalcularEstoque: TStoredProc
+    DatabaseName = 'SistemaDeVendas'
+    StoredProcName = 'RecalcularEstoque'
+    Left = 712
+    Top = 192
   end
 end

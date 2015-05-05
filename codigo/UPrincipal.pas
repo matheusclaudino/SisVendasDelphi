@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, XPMan, ComCtrls, ToolWin, jpeg, Buttons,
-  StdCtrls, AppEvnts;
+  StdCtrls, AppEvnts, DBTables, BDE;
 
 type
   TForm1 = class(TForm)
@@ -41,6 +41,8 @@ type
     procedure NivelVendedor();
     procedure NivelEstagiario();
     procedure Dinamico(F: TFormClass; F2: TForm);
+    procedure AELogException(Sender: TObject; E: Exception);
+    procedure imgRecalcularClick(Sender: TObject);
   private
     { Private declarations }
 
@@ -176,5 +178,32 @@ begin
   end;
 end;
 
+
+procedure TForm1.AELogException(Sender: TObject; E: Exception);
+begin
+  if(E is EDBEngineError) then
+    with EDBEngineError(E) do
+      case Errors[0].ErrorCode of
+        DBIERR_KEYVIOL:
+          ShowMessage('Já cadastrado.');
+        DBIERR_REQDERR:
+          ShowMessage('Campo obrigatório não preenchido.');
+      end
+    else
+      ShowMessage('Erro no banco de dados:' + #13#13 + E.Message);
+end;
+
+procedure TForm1.imgRecalcularClick(Sender: TObject);
+begin
+  try
+    DataModule1.spRecalcularEstoque.ExecProc;
+    ShowMessage('Recalculo efetuado.')
+  except
+  on E: Exception do
+    begin
+      raise;
+    end;
+  end;
+end;
 
 end.

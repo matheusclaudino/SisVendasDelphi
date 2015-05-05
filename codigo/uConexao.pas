@@ -181,6 +181,7 @@ type
     qNiveldescricao: TStringField;
     mUsuarioNivelUsuario: TStringField;
     qRecalcular: TQuery;
+    spRecalcularEstoque: TStoredProc;
 
     procedure mClienteAfterPost(DataSet: TDataSet);
     procedure mClienteAfterDelete(DataSet: TDataSet);

@@ -160,7 +160,7 @@ begin
   try
     ds.DataSet.Post;
   except
-    on E: Exception do
+    on E: EDatabaseError do
     begin
       raise;
     end;
@@ -384,7 +384,7 @@ var
 					if (peso = 10) then 
 						peso := 2; 
 				end; 
-				r := sm mod 11; 
+				r := sm mod 11;
 				if ((r = 0) or (r = 1)) then 
 					dig14 := '0' 
 				else str((11-r):1, dig14); 
@@ -431,8 +431,7 @@ begin
     begin
 
       Result := true;
-
-      TDBEdit(Components[I]).Hint := 'Campo Obrigatório';
+      ShowMessage('Campo Obrigatório');
       TDBEdit(Components[I]).SetFocus;
 
       Exit;
@@ -447,7 +446,7 @@ begin
 
       Result := true;
 
-      TDBLookupComboBox(Components[I]).Hint := 'Campo Obrigatório';
+      ShowMessage('Campo Obrigatório');
       TDBLookupComboBox(Components[I]).SetFocus;
 
       Exit;
