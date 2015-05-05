@@ -1,7 +1,7 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
-  Left = 644
-  Top = 251
+  Left = 103
+  Top = 144
   Height = 347
   Width = 807
   object dbSisVenda: TDatabase

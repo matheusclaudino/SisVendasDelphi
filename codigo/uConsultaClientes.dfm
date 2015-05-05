@@ -1,9 +1,12 @@
 inherited FConsultaClientes: TFConsultaClientes
+  Left = 271
+  Top = 172
   Caption = 'FConsultaClientes'
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited PageControl1: TPageControl
+    ActivePage = tbFiltros
     inherited tbFiltros: TTabSheet
       inherited gbFiltros: TGroupBox
         inherited BitBtn1: TBitBtn

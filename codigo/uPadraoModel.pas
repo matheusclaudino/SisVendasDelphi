@@ -142,13 +142,11 @@ begin
     begin
       if not isEmpty then
       begin
-        if not ds.DataSet.IsEmpty then
-        begin
+
             ds.DataSet.Edit;
             PageControl1.ActivePageIndex := 0;
         end else
             ShowMessage('Não Há Registros para Alteração.');
-      end;
     end;
   except
     on E: EDatabaseError do
@@ -168,7 +166,8 @@ begin
       raise;
     end;
   end;   }
-  if not isEmpty then
+  {if not isEmpty then
+    ds.DataSet.Post;}
     ds.DataSet.Post;
 end;
 

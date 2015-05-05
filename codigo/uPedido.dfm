@@ -1,6 +1,6 @@
 inherited FPedido: TFPedido
-  Left = 248
-  Top = 83
+  Left = 464
+  Top = 131
   Width = 749
   Height = 635
   Caption = 'FPedido'
@@ -12,7 +12,7 @@ inherited FPedido: TFPedido
     Top = 578
     Width = 733
   end
-  inherited ToolBar1: TToolBar
+  inherited TBAcaoTela: TToolBar
     Width = 733
     ButtonWidth = 41
     inherited btnDeletar: TToolButton
