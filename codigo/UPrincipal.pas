@@ -17,7 +17,7 @@ type
     imgUsuario: TImage;
     imgCliente: TImage;
     Image1: TImage;
-    Image5: TImage;
+    imgRecalcular: TImage;
     imgProduto: TImage;
     imgPedido: TImage;
     imgContas: TImage;
@@ -40,6 +40,7 @@ type
     procedure NivelGerente();
     procedure NivelVendedor();
     procedure NivelEstagiario();
+    procedure Dinamico(F: TFormClass; F2: TForm);
   private
     { Private declarations }
 
@@ -156,6 +157,7 @@ end;
 procedure TForm1.NivelVendedor();
 begin
   imgEntradaEstoque.Visible:= False;
+  imgRecalcular.Visible := False;
 end;
 
 procedure TForm1.NivelEstagiario();
@@ -163,5 +165,16 @@ begin
   imgCliente.Visible := False;
   imgCidade.Visible := False;
 end;
+
+procedure TForm1.Dinamico(F: TFormClass; F2: TForm);
+begin
+  Application.CreateForm(F,F2);
+  try
+    F2.ShowModal;
+  finally
+    F2.Free;
+  end;
+end;
+
 
 end.
