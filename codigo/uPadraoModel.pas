@@ -10,7 +10,7 @@ uses
 type
   TFormPadrao = class(TForm)
     StatusBar1: TStatusBar;
-    ToolBar1: TToolBar;
+    TBAcaoTela: TToolBar;
     btnNovo: TToolButton;
     btnDeletar: TToolButton;
     btnAlterar: TToolButton;
@@ -436,10 +436,9 @@ begin
     begin
 
       Result := true;
-      ShowMessage('Campo Obrigatório');
-      
+
       TDBEdit(Components[I]).ShowHint := True;
-      TDBEdit(Components[I]).Hint := 'Campo Obrigatório';
+      TDBEdit(Components[I]).Hint := 'Campo Obrigatório!';
       TDBEdit(Components[I]).SetFocus;
 
       Exit;
@@ -454,7 +453,8 @@ begin
 
       Result := true;
 
-      ShowMessage('Campo Obrigatório');
+      TDBLookupComboBox(Components[I]).ShowHint := True;
+      TDBLookupComboBox(Components[I]).Hint := 'Campo Obrigatório!';
       TDBLookupComboBox(Components[I]).SetFocus;
 
       Exit;

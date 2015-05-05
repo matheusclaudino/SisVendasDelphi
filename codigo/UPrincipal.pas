@@ -9,11 +9,11 @@ uses
 
 type
   TForm1 = class(TForm)
-    Panel1: TPanel;
+    Pprincipal: TPanel;
     XPManifest1: TXPManifest;
     Panel2: TPanel;
     Image2: TImage;
-    Panel3: TPanel;
+    PMenuDeOpcoes: TPanel;
     imgUsuario: TImage;
     imgCliente: TImage;
     Image1: TImage;
