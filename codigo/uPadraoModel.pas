@@ -137,6 +137,7 @@ end;
 
 procedure TFormPadrao.btnAlterarClick(Sender: TObject);
 begin
+  try
     if ds.DataSet.Active then
     begin
         if not ds.DataSet.IsEmpty then
@@ -146,11 +147,24 @@ begin
         end else
             ShowMessage('Não Há Registros para Alteração.');
     end;
+  except
+    on E: EDatabaseError do
+    begin
+      raise;
+    end;
+  end;
 end;
 
 procedure TFormPadrao.btnSalvarClick(Sender: TObject);
 begin
+  try
     ds.DataSet.Post;
+  except
+    on E: Exception do
+    begin
+      raise;
+    end;
+  end;
 end;
 
 procedure TFormPadrao.btnCancelarClick(Sender: TObject);

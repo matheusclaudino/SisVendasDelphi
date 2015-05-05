@@ -1492,4 +1492,9 @@ object DataModule1: TDataModule1
       Size = 25
     end
   end
+  object qRecalcular: TQuery
+    DatabaseName = 'SistemaDeVendas'
+    Left = 712
+    Top = 136
+  end
 end

@@ -180,6 +180,7 @@ type
     qNivelidNivel: TIntegerField;
     qNiveldescricao: TStringField;
     mUsuarioNivelUsuario: TStringField;
+    qRecalcular: TQuery;
 
     procedure mClienteAfterPost(DataSet: TDataSet);
     procedure mClienteAfterDelete(DataSet: TDataSet);
