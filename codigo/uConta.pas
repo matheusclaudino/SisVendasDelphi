@@ -10,16 +10,16 @@ uses
 type
   TFConta = class(TFormPadrao)
     Label1: TLabel;
-    DBEdit1: TDBEdit;
+    DBEidConta: TDBEdit;
     Label2: TLabel;
-    DBEdit2: TDBEdit;
+    DBEdataVenc: TDBEdit;
     Label3: TLabel;
-    DBEdit3: TDBEdit;
+    DBEdataPag: TDBEdit;
     DBCheckBox1: TDBCheckBox;
     Label4: TLabel;
-    DBEdit4: TDBEdit;
+    DBEnumDuplicata: TDBEdit;
     Label5: TLabel;
-    DBEdit5: TDBEdit;
+    DBEidFaturamento: TDBEdit;
     BtnBaixarContas: TToolButton;
     procedure BtnBaixarContasClick(Sender: TObject);
   private
