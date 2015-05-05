@@ -140,12 +140,15 @@ begin
   try
     if ds.DataSet.Active then
     begin
+      if not isEmpty then
+      begin
         if not ds.DataSet.IsEmpty then
         begin
             ds.DataSet.Edit;
             PageControl1.ActivePageIndex := 0;
         end else
             ShowMessage('Não Há Registros para Alteração.');
+      end;
     end;
   except
     on E: EDatabaseError do
