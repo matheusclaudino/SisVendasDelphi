@@ -157,14 +157,16 @@ end;
 
 procedure TFormPadrao.btnSalvarClick(Sender: TObject);
 begin
-  try
+  {try
     ds.DataSet.Post;
   except
     on E: EDatabaseError do
     begin
       raise;
     end;
-  end;
+  end;   }
+  if not isEmpty then
+    ds.DataSet.Post;
 end;
 
 procedure TFormPadrao.btnCancelarClick(Sender: TObject);
@@ -432,6 +434,9 @@ begin
 
       Result := true;
       ShowMessage('Campo Obrigatório');
+      
+      TDBEdit(Components[I]).ShowHint := True;
+      TDBEdit(Components[I]).Hint := 'Campo Obrigatório';
       TDBEdit(Components[I]).SetFocus;
 
       Exit;
