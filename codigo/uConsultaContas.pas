@@ -34,29 +34,29 @@ type
     mConsultaemail: TStringField;
     Panel1: TPanel;
     Label2: TLabel;
-    DBEdit1: TDBEdit;
-    DBEdit2: TDBEdit;
+    DBEidConta: TDBEdit;
+    DBEnome: TDBEdit;
     Label3: TLabel;
-    DBEdit3: TDBEdit;
+    DBEnumDuplicata: TDBEdit;
     Label4: TLabel;
-    DBEdit4: TDBEdit;
+    DBEdataFat: TDBEdit;
     Label5: TLabel;
-    DBEdit5: TDBEdit;
+    DBEdataVenc: TDBEdit;
     Label6: TLabel;
-    DBEdit6: TDBEdit;
+    DBEdataPag: TDBEdit;
     Label7: TLabel;
-    DBEdit7: TDBEdit;
-    DBEdit8: TDBEdit;
+    DBEidPedido: TDBEdit;
+    DBEnf: TDBEdit;
     Label9: TLabel;
-    DBEdit9: TDBEdit;
+    DBEvalorTotal: TDBEdit;
     Label11: TLabel;
     Label1: TLabel;
     Label8: TLabel;
     Label12: TLabel;
     Label13: TLabel;
-    DBEdit10: TDBEdit;
+    DBEdestinatario: TDBEdit;
     edt_Assunto: TEdit;
-    Memo1: TMemo;
+    mAssunto: TMemo;
     btnEnviarEmail: TBitBtn;
     ToolButton1: TToolButton;
     BitBtn2: TBitBtn;
@@ -97,7 +97,7 @@ begin
     begin
         ds.DataSet.Cancel;
         edt_Assunto.Clear;
-        Memo1.Clear;
+        mAssunto.Clear;
     end;
 end;
 
@@ -110,7 +110,7 @@ begin
   {Fecha DataSet}
   ds.DataSet.Cancel;
   edt_Assunto.Clear;
-  Memo1.Clear;
+  mAssunto.Clear;
 end;
 
 end.
