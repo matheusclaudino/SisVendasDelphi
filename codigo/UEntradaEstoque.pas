@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uPadraoModel, DB, Grids, DBGrids, StdCtrls, ComCtrls, ToolWin, uConexao,
-  DBCtrls, Mask, ExtCtrls, DBTables;
+  DBCtrls, Mask, ExtCtrls, DBTables,
+  Buttons;
 
 type
   TFEntradaEstoque = class(TFormPadrao)
@@ -16,16 +17,16 @@ type
     rbAutomatico: TRadioButton;
     rbManual: TRadioButton;
     Label1: TLabel;
-    DBEdit1: TDBEdit;
+    DBEidEntrada: TDBEdit;
     Label4: TLabel;
-    DBEdit4: TDBEdit;
-    DBEdit5: TDBEdit;
+    DBEidProduto: TDBEdit;
+    DBEdescricao: TDBEdit;
     Label6: TLabel;
     DBEqtd: TDBEdit;
     Label8: TLabel;
     DBEdata: TDBEdit;
     Label2: TLabel;
-    DBEdit2: TDBEdit;
+    DBEidUsuario: TDBEdit;
     DBLookupComboBox1: TDBLookupComboBox;
     procedure btnNovoClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
