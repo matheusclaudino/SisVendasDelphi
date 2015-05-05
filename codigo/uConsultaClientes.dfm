@@ -6,6 +6,9 @@ inherited FConsultaClientes: TFConsultaClientes
   inherited PageControl1: TPageControl
     inherited tbFiltros: TTabSheet
       inherited gbFiltros: TGroupBox
+        inherited BitBtn1: TBitBtn
+          OnClick = BitBtn1Click
+        end
         object Date_Inic: TDateTimePicker
           Left = 48
           Top = 16

@@ -362,11 +362,14 @@ inherited FPedido: TFPedido
     end
     inherited tbFiltros: TTabSheet
       inherited gbFiltros: TGroupBox
-        Width = 733
+        Width = 725
+        inherited BitBtn1: TBitBtn
+          OnClick = BitBtn1Click
+        end
       end
       inherited DBGrid1: TDBGrid
-        Width = 733
-        Height = 461
+        Width = 725
+        Height = 454
         Columns = <
           item
             Expanded = False

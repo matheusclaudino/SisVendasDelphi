@@ -16,6 +16,7 @@ type
     DBEnome: TDBEdit;
     Label3: TLabel;
     DBEuf: TDBEdit;
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -28,5 +29,11 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFCidade.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  ExportarExcel(DataModule1.mCidade);
+end;
 
 end.

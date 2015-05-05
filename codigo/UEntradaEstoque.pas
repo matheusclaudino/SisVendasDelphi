@@ -33,6 +33,7 @@ type
     procedure eEanKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEdataExit(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -106,6 +107,12 @@ begin
     ShowMessage('Data Inválida');
     DBEdata.SetFocus;
   end;
+end;
+
+procedure TFEntradaEstoque.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  ExportarExcel(DataModule1.mEntrada);
 end;
 
 end.

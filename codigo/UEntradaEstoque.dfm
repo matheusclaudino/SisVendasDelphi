@@ -169,6 +169,11 @@ inherited FEntradaEstoque: TFEntradaEstoque
       end
     end
     inherited tbFiltros: TTabSheet
+      inherited gbFiltros: TGroupBox
+        inherited BitBtn1: TBitBtn
+          OnClick = BitBtn1Click
+        end
+      end
       inherited DBGrid1: TDBGrid
         Columns = <
           item

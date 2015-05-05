@@ -253,8 +253,13 @@ inherited FCliente: TFCliente
       end
     end
     inherited tbFiltros: TTabSheet
+      inherited gbFiltros: TGroupBox
+        inherited BitBtn1: TBitBtn
+          OnClick = BitBtn1Click
+        end
+      end
       inherited DBGrid1: TDBGrid
-        Height = 325
+        Height = 318
       end
     end
   end

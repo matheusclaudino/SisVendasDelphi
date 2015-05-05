@@ -41,6 +41,7 @@ type
     mConsultaie: TStringField;
     mConsultaidCidade: TIntegerField;
     procedure btnPesquisarClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -65,6 +66,12 @@ begin
 
   inherited;
 
+end;
+
+procedure TFConsultaClientes.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  ExportarExcel(DataModule1.mCliente);
 end;
 
 end.

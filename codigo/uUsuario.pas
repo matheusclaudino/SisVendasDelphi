@@ -24,6 +24,7 @@ type
     DBLookupComboBox1: TDBLookupComboBox;
     Label7: TLabel;
     DBEidNivel: TDBEdit;
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -36,5 +37,11 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFUsuario.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  ExportarExcel(DataModule1.mUsuario);
+end;
 
 end.

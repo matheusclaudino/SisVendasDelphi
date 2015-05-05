@@ -24,6 +24,7 @@ type
     procedure BtnBaixarContasClick(Sender: TObject);
     procedure DBEdataVencExit(Sender: TObject);
     procedure DBEdataPagChange(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -86,6 +87,12 @@ begin
   begin
     ShowMessage('Data Inválida');
   end;
+end;
+
+procedure TFConta.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  ExportarExcel(DataModule1.mConta);
 end;
 
 end.

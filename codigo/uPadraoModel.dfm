@@ -115,7 +115,7 @@ object FormPadrao: TFormPadrao
     Top = 31
     Width = 912
     Height = 427
-    ActivePage = tbDados
+    ActivePage = tbFiltros
     Align = alClient
     TabOrder = 2
     object tbDados: TTabSheet

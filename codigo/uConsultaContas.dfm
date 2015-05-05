@@ -317,11 +317,14 @@ inherited FConsultaContas: TFConsultaContas
     end
     inherited tbFiltros: TTabSheet
       inherited gbFiltros: TGroupBox
-        Width = 897
+        Width = 889
+        inherited BitBtn1: TBitBtn
+          OnClick = BitBtn1Click
+        end
       end
       inherited DBGrid1: TDBGrid
-        Width = 897
-        Height = 399
+        Width = 889
+        Height = 392
         Columns = <
           item
             Expanded = False

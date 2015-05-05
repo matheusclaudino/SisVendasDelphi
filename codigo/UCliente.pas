@@ -38,6 +38,7 @@ type
     DBEidCidade: TDBEdit;
     procedure DBEcnpjChange(Sender: TObject);
     procedure DBEemailChange(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -69,6 +70,12 @@ begin
     ShowMessage('Email Inválido');
     DBEemail.SetFocus;
   end;
+end;
+
+procedure TFCliente.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  ExportarExcel(DataModule1.mCliente);
 end;
 
 end.

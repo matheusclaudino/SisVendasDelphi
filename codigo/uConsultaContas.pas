@@ -63,6 +63,7 @@ type
     procedure ToolButton1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure btnEnviarEmailClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -73,6 +74,8 @@ var
   FConsultaContas: TFConsultaContas;
 
 implementation
+
+uses uConexao;
 
 {$R *.dfm}
 
@@ -111,6 +114,12 @@ begin
   ds.DataSet.Cancel;
   edt_Assunto.Clear;
   mAssunto.Clear;
+end;
+
+procedure TFConsultaContas.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  ExportarExcel(DataModule1.mConta);
 end;
 
 end.
