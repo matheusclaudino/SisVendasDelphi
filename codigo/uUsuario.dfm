@@ -6,7 +6,6 @@ inherited FUsuario: TFUsuario
   PixelsPerInch = 96
   TextHeight = 13
   inherited PageControl1: TPageControl
-    ActivePage = tbDados
     inherited tbDados: TTabSheet
       inherited gbDados: TGroupBox
         object Label1: TLabel
@@ -15,7 +14,7 @@ inherited FUsuario: TFUsuario
           Width = 44
           Height = 13
           Caption = 'idUsuario'
-          FocusControl = DBEdit1
+          FocusControl = DBidUsuario
         end
         object Label2: TLabel
           Left = 24
@@ -23,7 +22,7 @@ inherited FUsuario: TFUsuario
           Width = 26
           Height = 13
           Caption = 'nome'
-          FocusControl = DBEdit2
+          FocusControl = DBEnome
         end
         object Label3: TLabel
           Left = 24
@@ -31,7 +30,7 @@ inherited FUsuario: TFUsuario
           Width = 29
           Height = 13
           Caption = 'senha'
-          FocusControl = DBEdit3
+          FocusControl = DBEsenha
         end
         object Label4: TLabel
           Left = 24
@@ -39,7 +38,7 @@ inherited FUsuario: TFUsuario
           Width = 24
           Height = 13
           Caption = 'email'
-          FocusControl = DBEdit4
+          FocusControl = DBEemail
         end
         object Label5: TLabel
           Left = 24
@@ -47,7 +46,7 @@ inherited FUsuario: TFUsuario
           Width = 46
           Height = 13
           Caption = 'username'
-          FocusControl = DBEdit5
+          FocusControl = DBEusername
         end
         object Label6: TLabel
           Left = 64
@@ -65,7 +64,7 @@ inherited FUsuario: TFUsuario
           Caption = 'N'#237'vel'
           FocusControl = DBEidNivel
         end
-        object DBEdit1: TDBEdit
+        object DBidUsuario: TDBEdit
           Left = 24
           Top = 48
           Width = 134
@@ -74,7 +73,7 @@ inherited FUsuario: TFUsuario
           DataSource = DS
           TabOrder = 0
         end
-        object DBEdit2: TDBEdit
+        object DBEnome: TDBEdit
           Left = 24
           Top = 88
           Width = 345
@@ -83,7 +82,7 @@ inherited FUsuario: TFUsuario
           DataSource = DS
           TabOrder = 1
         end
-        object DBEdit3: TDBEdit
+        object DBEsenha: TDBEdit
           Left = 24
           Top = 168
           Width = 345
@@ -92,7 +91,7 @@ inherited FUsuario: TFUsuario
           DataSource = DS
           TabOrder = 2
         end
-        object DBEdit4: TDBEdit
+        object DBEemail: TDBEdit
           Left = 24
           Top = 208
           Width = 345
@@ -101,7 +100,7 @@ inherited FUsuario: TFUsuario
           DataSource = DS
           TabOrder = 3
         end
-        object DBEdit5: TDBEdit
+        object DBEusername: TDBEdit
           Left = 24
           Top = 128
           Width = 345
