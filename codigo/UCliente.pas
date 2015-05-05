@@ -36,6 +36,8 @@ type
     Label13: TLabel;
     DBLookupComboBox1: TDBLookupComboBox;
     DBEidCidade: TDBEdit;
+    procedure DBEcnpjChange(Sender: TObject);
+    procedure DBEemailChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -48,5 +50,25 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFCliente.DBEcnpjChange(Sender: TObject);
+begin
+  inherited;
+  if not isCNPJ(DBEcnpj) then
+  begin
+    ShowMessage('CNPJ Inválido');
+    DBEcnpj.SetFocus;
+  end;
+end;
+
+procedure TFCliente.DBEemailChange(Sender: TObject);
+begin
+  inherited;
+  if not isEMail(DBEemail) then
+  begin
+    ShowMessage('Email Inválido');
+    DBEemail.SetFocus;
+  end;
+end;
 
 end.

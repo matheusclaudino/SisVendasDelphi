@@ -190,6 +190,7 @@ inherited FCliente: TFCliente
           DataField = 'cnpj'
           DataSource = DS
           TabOrder = 7
+          OnChange = DBEcnpjChange
         end
         object DBEtelFixo: TDBEdit
           Left = 232
@@ -217,6 +218,7 @@ inherited FCliente: TFCliente
           DataField = 'email'
           DataSource = DS
           TabOrder = 9
+          OnChange = DBEemailChange
         end
         object DBEie: TDBEdit
           Left = 24

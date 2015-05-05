@@ -22,6 +22,8 @@ type
     DBEidFaturamento: TDBEdit;
     BtnBaixarContas: TToolButton;
     procedure BtnBaixarContasClick(Sender: TObject);
+    procedure DBEdataVencExit(Sender: TObject);
+    procedure DBEdataPagChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -64,6 +66,25 @@ begin
     end
     else
         ShowMessage('Não Há registros');
+  end;
+end;
+
+procedure TFConta.DBEdataVencExit(Sender: TObject);
+begin
+  inherited;
+  if not isData(DBEdataVenc) then
+  begin
+    ShowMessage('Data Inválida');
+    DBEdataVenc.SetFocus;
+  end;
+end;
+
+procedure TFConta.DBEdataPagChange(Sender: TObject);
+begin
+  inherited;
+  if not isData(DBEdataPag) then
+  begin
+    ShowMessage('Data Inválida');
   end;
 end;
 

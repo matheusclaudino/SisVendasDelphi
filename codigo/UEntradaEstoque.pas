@@ -32,6 +32,7 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure eEanKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure DBEdataExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -95,6 +96,16 @@ begin
   END;
 
 
+end;
+
+procedure TFEntradaEstoque.DBEdataExit(Sender: TObject);
+begin
+  inherited;
+  if not isData(DBEdata) then
+  begin
+    ShowMessage('Data Inválida');
+    DBEdata.SetFocus;
+  end;
 end;
 
 end.

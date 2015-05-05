@@ -146,6 +146,7 @@ inherited FEntradaEstoque: TFEntradaEstoque
           DataSource = DS
           ReadOnly = True
           TabOrder = 8
+          OnExit = DBEdataExit
         end
         object DBEidUsuario: TDBEdit
           Left = 56
