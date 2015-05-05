@@ -37,7 +37,9 @@ type
     procedure Image10Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure AELogMessage(var Msg: tagMSG; var Handled: Boolean);
-
+    procedure NivelGerente();
+    procedure NivelVendedor();
+    procedure NivelEstagiario();
   private
     { Private declarations }
 
@@ -61,16 +63,23 @@ Uses  uPadraoModel, UCliente, uCidade, uPedido, uProduto, uUsuario, UEntradaEsto
 procedure TForm1.FormShow(Sender: TObject);
 begin
    mLog.Lines.Add('DATA: ' + FormatDateTime('dd/mm/yyyy',date) + ' ENTROU NO SISTEMA.');
+
   if(DataModule1.qLoginnivel.AsInteger = 2) then
   begin
-     imgUsuario.Enabled := False;
-     imgUsuario.Visible := False;
+    NivelGerente();
   end
   else if(DataModule1.qLoginnivel.AsInteger = 3) then
   begin
-    imgUsuario.Enabled := False;
-    imgEntradaEstoque.Enabled := False;
+    NivelGerente();
+    NivelVendedor();
+  end
+  else if(DataModule1.qLoginnivel.AsInteger = 4) then
+  begin
+    NivelGerente();
+    NivelVendedor();
+    NivelEstagiario();
   end;
+
   {Aplica Tela Cheia ao Form}
   ShowWindow(Handle, SW_MAXIMIZE);
   ShowMessage(DataModule1.qLoginnome.AsString + ' Bem vindo ao Real System!!!');
@@ -139,5 +148,20 @@ begin
   end;//fim case
 end;
 
+procedure TForm1.NivelGerente();
+begin
+  imgUsuario.Visible := False;
+end;
+
+procedure TForm1.NivelVendedor();
+begin
+  imgEntradaEstoque.Visible:= False;
+end;
+
+procedure TForm1.NivelEstagiario();
+begin
+  imgCliente.Visible := False;
+  imgCidade.Visible := False;
+end;
 
 end.
