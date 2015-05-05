@@ -88,42 +88,42 @@ end;
 
 procedure TForm1.imgClienteClick(Sender: TObject);
 begin
-  fcliente.show;
+  Dinamico(TFCliente, FCliente);
 end;
 
 procedure TForm1.imgCidadeClick(Sender: TObject);
 begin
-  FCidade.Show;
+  Dinamico(TFCidade, FCidade);
 end;
 
 procedure TForm1.imgPedidoClick(Sender: TObject);
 begin
-  FPedido.Show;
+  Dinamico(TFPedido, FPedido);
 end;
 
 procedure TForm1.imgProdutoClick(Sender: TObject);
 begin
-  FProduto.Show;
+  Dinamico(TFProduto, FProduto);
 end;
 
 procedure TForm1.imgUsuarioClick(Sender: TObject);
 begin
-  FUsuario.show;
-  end;
+  Dinamico(TFUsuario, FUsuario);
+end;
 
 procedure TForm1.imgEntradaEstoqueClick(Sender: TObject);
 begin
-  FEntradaEstoque.Show;
+  Dinamico(TFEntradaEstoque, FEntradaEstoque);
 end;
 
 procedure TForm1.imgContasClick(Sender: TObject);
 begin
-  FConta.Show;
+  Dinamico(TFConta, FConta);
 end;
 
 procedure TForm1.Image10Click(Sender: TObject);
 begin
-  FConsultas.Show;
+  Dinamico(TFConsultas, FConsultas);
 end;
 
 procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);

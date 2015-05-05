@@ -25,21 +25,6 @@ uses
 begin
   Application.Initialize;
   Application.CreateForm(TFLogin, FLogin);
-  Application.CreateForm(TForm1, Form1);
   Application.CreateForm(TDataModule1, DataModule1);
-  Application.CreateForm(TFormPadrao, FormPadrao);
-  Application.CreateForm(TFCliente, FCliente);
-  Application.CreateForm(TFCidade, FCidade);
-  Application.CreateForm(TFPedido, FPedido);
-  Application.CreateForm(TFProduto, FProduto);
-  Application.CreateForm(TFUsuario, FUsuario);
-  Application.CreateForm(TFEntradaEstoque, FEntradaEstoque);
-  Application.CreateForm(TFConta, FConta);
-  Application.CreateForm(TFEntradaEstoque, FEntradaEstoque);
-  Application.CreateForm(TFConsultas, FConsultas);
-  Application.CreateForm(TFConsultaContas, FConsultaContas);
-  Application.CreateForm(TFConsultaClientes, FConsultaClientes);
-  Application.CreateForm(TFConsultaProdutos, FConsultaProdutos);
-  Application.CreateForm(TFConsultaEstoque, FConsultaEstoque);
   Application.Run;
 end.

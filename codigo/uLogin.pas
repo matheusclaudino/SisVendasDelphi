@@ -25,7 +25,7 @@ var
 
 implementation
 
-uses uPrincipal, uConexao;
+uses uPrincipal, uConexao, uPadraoModel;
 
 {$R *.dfm}
 
@@ -37,7 +37,7 @@ begin
 
   if not (DataModule1.qLogin.IsEmpty) then
   begin
-    Form1.Show;
+    Form1.Dinamico(TForm1, Form1);
     FLogin.Visible := False;
   end
   else
