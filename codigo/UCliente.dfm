@@ -1,5 +1,4 @@
 inherited FCliente: TFCliente
-  Left = 351
   Height = 499
   Caption = 'FCliente'
   OldCreateOrder = True
@@ -190,7 +189,7 @@ inherited FCliente: TFCliente
           DataField = 'cnpj'
           DataSource = DS
           TabOrder = 7
-          OnChange = DBEcnpjChange
+          OnExit = DBEcnpjExit
         end
         object DBEtelFixo: TDBEdit
           Left = 232
@@ -218,7 +217,7 @@ inherited FCliente: TFCliente
           DataField = 'email'
           DataSource = DS
           TabOrder = 9
-          OnChange = DBEemailChange
+          OnExit = DBEemailExit
         end
         object DBEie: TDBEdit
           Left = 24

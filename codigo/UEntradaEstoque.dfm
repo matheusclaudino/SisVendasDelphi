@@ -1,5 +1,4 @@
 inherited FEntradaEstoque: TFEntradaEstoque
-  Left = 345
   Top = 175
   Caption = 'FEntradaEstoque'
   OldCreateOrder = True

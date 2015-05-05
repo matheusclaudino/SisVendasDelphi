@@ -25,6 +25,7 @@ type
     Label7: TLabel;
     DBEidNivel: TDBEdit;
     procedure BitBtn1Click(Sender: TObject);
+    procedure DBEemailExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,6 +43,16 @@ procedure TFUsuario.BitBtn1Click(Sender: TObject);
 begin
   inherited;
   ExportarExcel(DataModule1.mUsuario);
+end;
+
+procedure TFUsuario.DBEemailExit(Sender: TObject);
+begin
+  inherited;
+  if not isEMail(DBEemail) then
+  begin
+    ShowMessage('Email Inválido');
+    DBEemail.SetFocus;
+  end;
 end;
 
 end.

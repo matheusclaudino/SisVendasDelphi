@@ -1,5 +1,5 @@
 inherited FConsultaContas: TFConsultaContas
-  Left = 195
+  Left = 111
   Top = 128
   Width = 913
   Height = 573
@@ -11,7 +11,7 @@ inherited FConsultaContas: TFConsultaContas
     Top = 516
     Width = 897
   end
-  inherited ToolBar1: TToolBar
+  inherited TBAcaoTela: TToolBar
     Width = 897
     ButtonWidth = 27
     inherited btnNovo: TToolButton

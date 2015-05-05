@@ -36,9 +36,9 @@ type
     Label13: TLabel;
     DBLookupComboBox1: TDBLookupComboBox;
     DBEidCidade: TDBEdit;
-    procedure DBEcnpjChange(Sender: TObject);
-    procedure DBEemailChange(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
+    procedure DBEemailExit(Sender: TObject);
+    procedure DBEcnpjExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -52,17 +52,13 @@ implementation
 
 {$R *.dfm}
 
-procedure TFCliente.DBEcnpjChange(Sender: TObject);
+procedure TFCliente.BitBtn1Click(Sender: TObject);
 begin
   inherited;
-  if not isCNPJ(DBEcnpj) then
-  begin
-    ShowMessage('CNPJ Inválido');
-    DBEcnpj.SetFocus;
-  end;
+  ExportarExcel(DataModule1.mCliente);
 end;
 
-procedure TFCliente.DBEemailChange(Sender: TObject);
+procedure TFCliente.DBEemailExit(Sender: TObject);
 begin
   inherited;
   if not isEMail(DBEemail) then
@@ -72,10 +68,14 @@ begin
   end;
 end;
 
-procedure TFCliente.BitBtn1Click(Sender: TObject);
+procedure TFCliente.DBEcnpjExit(Sender: TObject);
 begin
   inherited;
-  ExportarExcel(DataModule1.mCliente);
+   if not isCNPJ(DBEcnpj) then
+  begin
+    ShowMessage('CNPJ Inválido');
+    DBEcnpj.SetFocus;
+  end;
 end;
 
 end.

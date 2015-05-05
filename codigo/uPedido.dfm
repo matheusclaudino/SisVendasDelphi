@@ -1,6 +1,6 @@
 inherited FPedido: TFPedido
-  Left = 464
-  Top = 131
+  Left = 275
+  Top = 103
   Width = 749
   Height = 635
   Caption = 'FPedido'

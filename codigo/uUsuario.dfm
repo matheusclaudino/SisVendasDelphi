@@ -1,5 +1,4 @@
 inherited FUsuario: TFUsuario
-  Left = 426
   Top = 221
   Caption = 'FUsuario'
   OldCreateOrder = True
@@ -99,6 +98,7 @@ inherited FUsuario: TFUsuario
           DataField = 'email'
           DataSource = DS
           TabOrder = 3
+          OnExit = DBEemailExit
         end
         object DBEusername: TDBEdit
           Left = 24

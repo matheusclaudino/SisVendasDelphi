@@ -1,5 +1,4 @@
 inherited FConsultaClientes: TFConsultaClientes
-  Left = 271
   Top = 172
   Caption = 'FConsultaClientes'
   OldCreateOrder = True

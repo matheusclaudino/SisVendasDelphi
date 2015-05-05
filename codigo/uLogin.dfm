@@ -1,5 +1,5 @@
 object FLogin: TFLogin
-  Left = 535
+  Left = 403
   Top = 250
   Width = 510
   Height = 292

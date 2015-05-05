@@ -1,5 +1,4 @@
 inherited FProduto: TFProduto
-  Left = 417
   Top = 35
   Height = 516
   Caption = 'FProduto'
@@ -11,6 +10,7 @@ inherited FProduto: TFProduto
   end
   inherited PageControl1: TPageControl
     Height = 428
+    ActivePage = tbFiltros
     inherited tbDados: TTabSheet
       inherited gbDados: TGroupBox
         Height = 400
@@ -120,7 +120,7 @@ inherited FProduto: TFProduto
         end
       end
       inherited DBGrid1: TDBGrid
-        Height = 342
+        Height = 335
       end
     end
   end

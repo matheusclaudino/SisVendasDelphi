@@ -1,11 +1,10 @@
 inherited FConta: TFConta
-  Left = 366
   Top = 91
   Caption = 'FConta'
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
-  inherited ToolBar1: TToolBar
+  inherited TBAcaoTela: TToolBar
     inherited btnNovo: TToolButton
       Visible = False
     end
