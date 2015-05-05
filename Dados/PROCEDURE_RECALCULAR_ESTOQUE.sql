@@ -62,7 +62,12 @@ BEGIN
 	
 	-- Decrementar o estoque
 	DECLARE CursorDecrementa CURSOR FOR
-		SELECT idProduto, quantidade, idPedido FROM pedido_item
+		SELECT 
+			pi.idProduto, pi.quantidade, pi.idPedido FROM pedido_item pi, pedido p
+		WHERE
+			pi.idPedido = p.idPedido
+		AND
+			p.faturado = 1
 	
 	OPEN CursorDecrementa
 	
