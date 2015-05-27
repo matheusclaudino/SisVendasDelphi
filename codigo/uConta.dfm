@@ -85,7 +85,6 @@ inherited FConta: TFConta
           DataField = 'data_venc'
           DataSource = DS
           TabOrder = 1
-          OnExit = DBEdataVencExit
         end
         object DBEdataPag: TDBEdit
           Left = 24
@@ -95,7 +94,6 @@ inherited FConta: TFConta
           DataField = 'data_pag'
           DataSource = DS
           TabOrder = 2
-          OnChange = DBEdataPagChange
         end
         object DBCheckBox1: TDBCheckBox
           Left = 24

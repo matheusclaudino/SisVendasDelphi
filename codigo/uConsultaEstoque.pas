@@ -26,6 +26,7 @@ type
     mConsultanome: TStringField;
     Edit_Ean: TLabeledEdit;
     procedure btnPesquisarClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,6 +48,12 @@ begin
   qConsulta.ParamByName(':idProd').Text :=  IntToStr( DataModule1.qAux.FieldByName('idProduto').AsInteger);
 
   inherited;
+end;
+
+procedure TFConsultaEstoque.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  ExportarExcel(mConsulta);
 end;
 
 end.

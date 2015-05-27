@@ -39,6 +39,13 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure DBEemailExit(Sender: TObject);
     procedure DBEcnpjExit(Sender: TObject);
+    procedure btnNovoClick(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
+    procedure DBEcnpjEnter(Sender: TObject);
+    procedure DBEtelFixoEnter(Sender: TObject);
+    procedure DBEtelCelEnter(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,6 +56,8 @@ var
   FCliente: TFCliente;
 
 implementation
+
+uses MaskUtils, uPrincipal;
 
 {$R *.dfm}
 
@@ -71,11 +80,59 @@ end;
 procedure TFCliente.DBEcnpjExit(Sender: TObject);
 begin
   inherited;
-   if not isCNPJ(DBEcnpj) then
+  if not isCNPJ(DBEcnpj) then
   begin
     ShowMessage('CNPJ Inválido');
     DBEcnpj.SetFocus;
   end;
+end;
+
+procedure TFCliente.btnNovoClick(Sender: TObject);
+begin
+  DBEidCliente.Color := CorCamposOnlyRead();
+  DBEidCidade.Color := CorCamposOnlyRead();
+  inherited;
+
+end;
+
+procedure TFCliente.btnAlterarClick(Sender: TObject);
+begin
+  DBEidCliente.Color := CorCamposOnlyRead();
+  DBEidCidade.Color := CorCamposOnlyRead();
+  inherited;
+
+end;
+
+procedure TFCliente.btnCancelarClick(Sender: TObject);
+begin
+  inherited;
+  DBEidCliente.Color := clWindow;
+  DBEidCidade.Color := clWindow;
+end;
+
+procedure TFCliente.btnSalvarClick(Sender: TObject);
+begin
+  inherited;
+  DBEidCliente.Color := clWindow;
+  DBEidCidade.Color := clWindow;
+end;
+
+procedure TFCliente.DBEcnpjEnter(Sender: TObject);
+begin
+  inherited;
+  //DBEcnpj.Field.EditMask:= '00.000.000/0000-00;1;_';
+end;
+
+procedure TFCliente.DBEtelFixoEnter(Sender: TObject);
+begin
+  inherited;
+  DBEtelFixo.Field.EditMask:= '(00)0000-0000;1;_';
+end;
+
+procedure TFCliente.DBEtelCelEnter(Sender: TObject);
+begin
+  inherited;
+  DBEtelCel.Field.EditMask:= '(00)00000-0000;1;_';
 end;
 
 end.

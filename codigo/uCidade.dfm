@@ -1,9 +1,12 @@
 inherited FCidade: TFCidade
+  Left = 226
+  Top = 160
   Caption = 'FCidade'
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited PageControl1: TPageControl
+    ActivePage = tbFiltros
     inherited tbDados: TTabSheet
       inherited gbDados: TGroupBox
         object Label1: TLabel
@@ -17,17 +20,17 @@ inherited FCidade: TFCidade
         object Label2: TLabel
           Left = 22
           Top = 61
-          Width = 26
+          Width = 28
           Height = 13
-          Caption = 'nome'
+          Caption = 'Nome'
           FocusControl = DBEnome
         end
         object Label3: TLabel
           Left = 22
           Top = 101
-          Width = 9
+          Width = 14
           Height = 13
-          Caption = 'uf'
+          Caption = 'UF'
           FocusControl = DBEuf
         end
         object DBEidCidade: TDBEdit
@@ -35,11 +38,11 @@ inherited FCidade: TFCidade
           Top = 37
           Width = 134
           Height = 21
-          Color = 14155258
+          TabStop = False
           DataField = 'idCidade'
           DataSource = DS
           ReadOnly = True
-          TabOrder = 0
+          TabOrder = 2
         end
         object DBEnome: TDBEdit
           Left = 22
@@ -48,7 +51,7 @@ inherited FCidade: TFCidade
           Height = 21
           DataField = 'nome'
           DataSource = DS
-          TabOrder = 1
+          TabOrder = 0
         end
         object DBEuf: TDBEdit
           Left = 22
@@ -57,7 +60,7 @@ inherited FCidade: TFCidade
           Height = 21
           DataField = 'uf'
           DataSource = DS
-          TabOrder = 2
+          TabOrder = 1
         end
       end
     end

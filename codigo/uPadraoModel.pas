@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, jpeg, ExtCtrls, ComCtrls, ToolWin, uConexao, DB, StdCtrls,
-  Grids, DBGrids, DBCtrls, Buttons, ComObj, DBClient;
+  Grids, DBGrids, DBCtrls, Buttons, ComObj, DBClient, MaskUtils;
 
 type
   TFormPadrao = class(TForm)
@@ -44,7 +44,6 @@ type
     procedure btnAnteriorClick(Sender: TObject);
     procedure btnProximoClick(Sender: TObject);
     procedure btnUltimoClick(Sender: TObject);
-    procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormCreate(Sender: TObject);
     procedure ExportarExcel(dado: TClientDataSet);
     function isData(Field : TDBEdit) : Boolean;
@@ -52,18 +51,24 @@ type
     function isCNPJ(Field : TDBEdit): boolean;
     function isEMail(Field : TDBEdit): Boolean;
     function isEmpty: Boolean;
+    procedure NivelGerente(F : TForm);
+    procedure NivelVendedor(F : TForm);
+    procedure NivelEstagiario(F : TForm);
   private
     procedure StatusBotoes(e: integer);
+
     { Private declarations }
   public
     { Public declarations }
+    function CorCamposOnlyRead():TColor;
   end;
 
 var
   FormPadrao: TFormPadrao;
 
 implementation
-Uses  uPrincipal;
+Uses  uPrincipal, uCliente, uProduto, uEntradaEstoque, uUsuario, uPedido, uConta, uConsultas,
+      uCidade;
 
 {$R *.dfm}
 
@@ -94,12 +99,16 @@ end;
 procedure TFormPadrao.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
+  {VK_RETURN é a tecla enter}
   if( key = vk_return)
       and not (ActiveControl is tmemo)
       and not (ActiveControl is TDBMemo)
       and not (ActiveControl is TDBGrid) then
-      Perform( WM_NEXTDLGCTL,0,0);
-end;
+      begin
+        PERFORM(WM_NEXTDLGCTL,0,0); 
+        KEY:=0;
+        end
+  end;
 
 procedure TFormPadrao.DSStateChange(Sender: TObject);
 begin
@@ -116,12 +125,24 @@ end;
 procedure TFormPadrao.FormShow(Sender: TObject);
 begin
     StatusBotoes(2);
-    if(DataModule1.qLoginnivel.AsInteger = 4) then
+    btnNovo.Visible := True;
+    btnDeletar.Visible := True;
+    btnAlterar.Visible := True;
+    btnSalvar.Visible := True;
+    //GERENTE
+    if(DataModule1.qLoginnivel.AsInteger = 2) then
     begin
-      btnNovo.Visible := False;
-      btnDeletar.Visible := False;
-      btnAlterar.Visible := False;
-      btnSalvar.Visible := False;
+      NivelGerente(Self);
+    end
+    //VENDEDOR
+    else if(DataModule1.qLoginnivel.AsInteger = 3) then
+    begin
+      NivelVendedor(Self);
+    end
+    //ESTAGIÁRIO
+    else if(DataModule1.qLoginnivel.AsInteger = 4) then
+    begin
+      NivelEstagiario(Self);
     end;
 end;
 
@@ -129,10 +150,10 @@ procedure TFormPadrao.btnNovoClick(Sender: TObject);
 begin
     if not ds.DataSet.Active then
         ds.DataSet.Open;
-
+    PageControl1.ActivePageIndex := 0;
     ds.DataSet.Append;
 
-    PageControl1.ActivePageIndex := 0;
+
 end;
 
 procedure TFormPadrao.btnAlterarClick(Sender: TObject);
@@ -140,14 +161,11 @@ begin
   try
     if ds.DataSet.Active then
     begin
-      if not isEmpty then
-      begin
 
             ds.DataSet.Edit;
             PageControl1.ActivePageIndex := 0;
         end else
             ShowMessage('Não Há Registros para Alteração.');
-    end;
   except
     on E: EDatabaseError do
     begin
@@ -187,7 +205,7 @@ begin
     begin
         if (Application.MessageBox('Deseja Deletar ', 'Deletar', MB_YESNO + MB_ICONQUESTION) = id_yes) then
         begin
-          ds.DataSet.Cancel;
+          ds.DataSet.Delete;
         end;
     end
     else
@@ -221,16 +239,9 @@ begin
     ds.DataSet.Last;
 end;
 
-procedure TFormPadrao.FormKeyPress(Sender: TObject; var Key: Char);
-begin
-  if key=#13 then begin
-    SelectNext(ActiveControl as TWinControl,True,True);
-    key:=#0;
-  end;
-end;
-
 procedure TFormPadrao.FormCreate(Sender: TObject);
 begin
+{Esta propriedade define se o Delphi ira detectar as teclas que sao acionadas no form.}
   KeyPreview:=true;
 end;
 
@@ -460,6 +471,57 @@ begin
 
     end;
 
+  end;
+
+end;
+
+function TFormPadrao.CorCamposOnlyRead: TColor;
+begin
+  Result := $009393FF;
+end;
+
+procedure TFormPadrao.NivelGerente(F : TForm);
+begin
+  if(F is TFUsuario) then
+  begin
+    btnNovo.Visible := False;
+    btnDeletar.Visible := False;
+    btnAlterar.Visible := False;
+    btnSalvar.Visible := False;
+  end;
+end;
+
+procedure TFormPadrao.NivelVendedor(F : TForm);
+begin
+
+  if(F is TFUsuario) then
+    NivelGerente(F)
+  else if(F is TFEntradaEstoque)then
+  begin
+    btnNovo.Visible := False;
+    btnDeletar.Visible := False;
+    btnAlterar.Visible := False;
+    btnSalvar.Visible := False;
+  end;
+
+end;
+
+procedure TFormPadrao.NivelEstagiario(F : TForm);
+begin
+
+  if(F is TFCliente) OR (F is TFCidade) then
+  begin
+    btnNovo.Visible := True;
+    btnDeletar.Visible := False;
+    btnAlterar.Visible := False;
+    btnSalvar.Visible := True;
+  end
+  else
+  begin
+    btnNovo.Visible := False;
+    btnDeletar.Visible := False;
+    btnAlterar.Visible := False;
+    btnSalvar.Visible := False;
   end;
 
 end;

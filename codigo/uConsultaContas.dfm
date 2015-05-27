@@ -59,6 +59,7 @@ inherited FConsultaContas: TFConsultaContas
   inherited PageControl1: TPageControl
     Width = 897
     Height = 485
+    ActivePage = tbFiltros
     inherited tbDados: TTabSheet
       ParentShowHint = False
       inherited gbDados: TGroupBox

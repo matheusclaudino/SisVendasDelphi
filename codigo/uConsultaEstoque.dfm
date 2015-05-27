@@ -21,8 +21,12 @@ inherited FConsultaEstoque: TFConsultaEstoque
     end
   end
   inherited PageControl1: TPageControl
+    ActivePage = tbFiltros
     inherited tbFiltros: TTabSheet
       inherited gbFiltros: TGroupBox
+        inherited BitBtn1: TBitBtn
+          OnClick = BitBtn1Click
+        end
         object Edit_Ean: TLabeledEdit
           Left = 72
           Top = 24

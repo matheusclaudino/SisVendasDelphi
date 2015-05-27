@@ -46,6 +46,7 @@ type
     qValorTotal: TQuery;
     ed_vlTotal: TDBEdit;
     btnFaturar: TToolButton;
+    qExcluiPedidoItem: TQuery;
     procedure ed_barraKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure ed_vlTotalEnter(Sender: TObject);
@@ -63,6 +64,8 @@ type
     procedure DBGrid2KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure BitBtn1Click(Sender: TObject);
+    procedure ed_barraKeyPress(Sender: TObject; var Key: Char);
+    procedure btnDeletarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -153,6 +156,14 @@ begin
   PageControl1.ActivePageIndex := 0;
   btnFaturar.Enabled := false;
 
+  DBGrid2.TabOrder := 6;
+  ed_barra.TabOrder := 4;
+
+  DBEcodPedido.Color := CorCamposOnlyRead();
+  DBEidCliente.Color := CorCamposOnlyRead();
+  ed_vlTotal.Color := CorCamposOnlyRead();
+  
+
   inherited;
 
   {Indica a data Atual Como data do Pedido}
@@ -180,6 +191,9 @@ procedure TFPedido.btnSalvarClick(Sender: TObject);
 begin
   
   inherited;
+  DBEcodPedido.Color := clWindow;
+  DBEidCliente.Color := clWindow;
+  ed_vlTotal.Color := clWindow;
   btnFaturar.Enabled := true;
 
 
@@ -191,6 +205,9 @@ begin
   {Faz o controle - Pedidos já faturados não devem ser alterados}
   if(Ds.DataSet.FieldByName('faturado').AsBoolean = false)then
   begin
+    DBEcodPedido.Color := CorCamposOnlyRead();
+    DBEidCliente.Color := CorCamposOnlyRead();
+    ed_vlTotal.Color := CorCamposOnlyRead();
     inherited;
   end else
     ShowMessage('Pedido Ja Faturado - Não pode ser Alterado!');
@@ -273,8 +290,16 @@ end;
 
 procedure TFPedido.btnCancelarClick(Sender: TObject);
 begin
+  {Exclui os Registros já inseridos de Pedido_item}
+  qExcluiPedidoItem.Close;
+  {qExcluiPedidoItem.ParamByName('idPed').AsInteger:= StrToInt(DBEcodPedido.Text); }
+  qExcluiPedidoItem.ParamByName('idPed').AsInteger:= DataModule1.mPedidoidPedido.AsInteger;
+  qExcluiPedidoItem.ExecSQL;
   inherited;
-  
+
+  DBEcodPedido.Color := clWindow;
+  DBEidCliente.Color := clWindow;
+  ed_vlTotal.Color := clWindow;
   btnFaturar.Enabled := true;
 end;
 
@@ -300,7 +325,7 @@ begin
   begin
   texto := InputBox('Alterar','Quantidade', DataModule1.mPedidoItemquantidade.AsString);
   DataModule1.mPedidoItem.Edit;
-  
+
   DataModule1.mPedidoItemquantidade.AsInteger := StrToInt(texto);
   DataModule1.mPedidoItemprecoParcial.AsFloat := ((DataModule1.mPedidoItemquantidade.AsInteger)*(DataModule1.mPedidoItemprecoUnitario.AsFloat));
   DataModule1.mPedidoItem.Post;
@@ -342,6 +367,80 @@ procedure TFPedido.BitBtn1Click(Sender: TObject);
 begin
   inherited;
   ExportarExcel(DataModule1.mPedido);
+end;
+
+procedure TFPedido.ed_barraKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  if (key = #13) and (trim(ed_barra.Text) <> '') then
+  begin
+      qProduto.Close;
+      qProduto.ParamByName('PEan').AsString:=(ed_barra.Text);
+      qProduto.Open;
+
+      {Abre Edição}
+       if not DataModule1.mpedidoitem.Active then
+            DataModule1.mpedidoitem.Open;
+
+      if DataModule1.mPedidoItem.Locate('idproduto',qProdutoidProduto.AsString,[]) then
+      begin
+         DataModule1.mPedidoItem.Edit;
+         DataModule1.mPedidoItemquantidade.AsInteger :=DataModule1.mPedidoItemquantidade.AsInteger +1;
+         DataModule1.mPedidoItemprecoParcial.AsFloat := ((DataModule1.mPedidoItemquantidade.AsInteger)*(DataModule1.mPedidoItemprecoUnitario.AsFloat));
+
+
+         {Mostra a linha da DBGrid separadamente}
+         DBEidPedido.Text := DataModule1.mPedidoItemidPedido.AsString;
+         DBEidProduto.Text := DataModule1.mPedidoItemidProduto.AsString;
+         DBEqtde.Text := DataModule1.mPedidoItemquantidade.AsString;
+         DBEprecoParcial.Text := DataModule1.mPedidoItemprecoParcial.AsString;
+         DBEprecoUnitario.Text := DataModule1.mPedidoItemprecoUnitario.AsString;
+      end
+      else
+      begin
+          DataModule1.mpedidoitem.Append;
+
+          DBEidPedido.Text := DBEcodPedido.Text;
+          DBEidProduto.Text := qProduto.FieldByName('idProduto').AsString;
+          DBEqtde.Text := IntToStr(1);
+          DBEprecoParcial.Text := IntToStr(StrToInt(qProduto.FieldByName('preco').AsString) * StrToInt(DBEqtde.Text));
+          DBEprecoUnitario.Text := qProduto.FieldByName('preco').AsString;
+
+          DataModule1.mPedidoItemidPedido.AsInteger := DataModule1.mPedidoidPedido.AsInteger;
+          DataModule1.mPedidoItemidProduto.AsInteger := qProdutoidProduto.AsInteger;
+          DataModule1.mPedidoItemquantidade.AsInteger := 1;
+          DataModule1.mPedidoItemprecoUnitario.AsFloat := qProdutopreco.AsFloat;
+          DataModule1.mPedidoItemprecoParcial.AsFloat  := qProdutopreco.AsFloat;
+          DataModule1.mPedidoItemdescricao.AsString := qProdutodescricao.AsString;
+      end;
+
+      {Salva}
+      DataModule1.mPedidoItem.Post;
+      DataModule1.mPedidoItem.ApplyUpdates(-1);
+
+      {Atualiza Edit vl_Total}
+      qValorTotal.Close;
+      qValorTotal.ParamByName('PVlTotal').AsString:=(DBEcodPedido.Text);
+      qValorTotal.Open;
+      if not DataModule1.mpedidoitem.Active then {Atualiza Edit vl_Total - Abre Edição}
+            DataModule1.mpedidoitem.Open;
+      {ShowMessage(qValorTotal.FieldByName('total').AsString);}
+      DataModule1.mPedidovalorTotal.AsFloat := StrToInt(qValorTotal.FieldByName('total').AsString);
+      {Volta o Foco pro Edit EAN}
+      ed_barra.clear;
+      ed_barra.SetFocus;
+  end;
+  ed_barra.SetFocus;
+end;
+
+procedure TFPedido.btnDeletarClick(Sender: TObject);
+begin
+  {Faz o controle - Pedidos já faturados não devem ser excluidos}
+  if(Ds.DataSet.FieldByName('faturado').AsBoolean = false)then
+  begin
+      inherited;
+  end else
+    ShowMessage('Pedido Ja Faturado - Não pode ser Excluído!');
 end;
 
 end.

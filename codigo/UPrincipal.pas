@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, XPMan, ComCtrls, ToolWin, jpeg, Buttons,
-  StdCtrls, AppEvnts, DBTables, BDE;
+  StdCtrls, AppEvnts, DBTables, BDE, DBClient;
 
 type
   TForm1 = class(TForm)
@@ -37,9 +37,6 @@ type
     procedure Image10Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure AELogMessage(var Msg: tagMSG; var Handled: Boolean);
-    procedure NivelGerente();
-    procedure NivelVendedor();
-    procedure NivelEstagiario();
     procedure Dinamico(F: TFormClass; F2: TForm);
     procedure AELogException(Sender: TObject; E: Exception);
     procedure imgRecalcularClick(Sender: TObject);
@@ -66,23 +63,13 @@ Uses  uPadraoModel, UCliente, uCidade, uPedido, uProduto, uUsuario, UEntradaEsto
 procedure TForm1.FormShow(Sender: TObject);
 begin
    mLog.Lines.Add('DATA: ' + FormatDateTime('dd/mm/yyyy',date) + ' ENTROU NO SISTEMA.');
-
-  if(DataModule1.qLoginnivel.AsInteger = 2) then
-  begin
-    NivelGerente();
-  end
-  else if(DataModule1.qLoginnivel.AsInteger = 3) then
-  begin
-    NivelGerente();
-    NivelVendedor();
-  end
-  else if(DataModule1.qLoginnivel.AsInteger = 4) then
-  begin
-    NivelGerente();
-    NivelVendedor();
-    NivelEstagiario();
-  end;
-
+   //VENDEDOR OU ESTAGIÁRIO
+   if(DataModule1.qLoginnivel.AsInteger = 3) OR (DataModule1.qLoginnivel.AsInteger = 4) then
+   begin
+    imgRecalcular.Enabled := False;
+    imgRecalcular.Hint := 'ACESSO NEGADO!!!';
+   end;
+   
   {Aplica Tela Cheia ao Form}
   ShowWindow(Handle, SW_MAXIMIZE);
   ShowMessage(DataModule1.qLoginnome.AsString + ' Bem vindo ao Real System!!!');
@@ -151,23 +138,6 @@ begin
   end;//fim case
 end;
 
-procedure TForm1.NivelGerente();
-begin
-  imgUsuario.Visible := False;
-end;
-
-procedure TForm1.NivelVendedor();
-begin
-  imgEntradaEstoque.Visible:= False;
-  imgRecalcular.Visible := False;
-end;
-
-procedure TForm1.NivelEstagiario();
-begin
-  imgCliente.Visible := False;
-  imgCidade.Visible := False;
-end;
-
 procedure TForm1.Dinamico(F: TFormClass; F2: TForm);
 begin
   Application.CreateForm(F,F2);
@@ -181,23 +151,35 @@ end;
 
 procedure TForm1.AELogException(Sender: TObject; E: Exception);
 begin
-  if(E is EDBEngineError) then
+  if(Sender is TClientDataSet) then
+  begin
+    ShowMessage(Sender.ClassName);
+  end;
+
+  if (E is EReconcileError) then
+  begin
+    if pos('THE DELETE STATEMENT CONFLICTED WITH THE REFERENCE CONSTRAINT', UpperCase(E.Message)) > 0 then
+      ShowMessage('Registro vinculado a outra tabela, ERRO Chave Estrangeira!');
+  end
+  else if(E is EDBEngineError) then
     with EDBEngineError(E) do
       case Errors[0].ErrorCode of
         DBIERR_KEYVIOL:
           ShowMessage('Já cadastrado.');
         DBIERR_REQDERR:
           ShowMessage('Campo obrigatório não preenchido.');
+        DBIERR_FORIEGNKEYERR:
+          ShowMessage ('Erro integridade referencial.');
       end
-    else
-      ShowMessage('Erro no banco de dados:' + #13#13 + E.Message);
+  else
+    ShowMessage('Erro no banco de dados:' + #13#13 + E.Message);
 end;
 
 procedure TForm1.imgRecalcularClick(Sender: TObject);
 begin
   try
     DataModule1.spRecalcularEstoque.ExecProc;
-    ShowMessage('Recalculo efetuado.')
+    ShowMessage('Recalculo efetuado.');
   except
   on E: Exception do
     begin
@@ -205,5 +187,6 @@ begin
     end;
   end;
 end;
+
 
 end.
