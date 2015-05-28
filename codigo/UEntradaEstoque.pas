@@ -171,10 +171,11 @@ begin
   try
     DataModule1.spRecalcularEstoque.ExecProc;
   except
-  on E: Execption do
+  on E: Exception do
     begin
       raise;
     end;
+  end;
   DBEidEntrada.Color := clWindow;
   DBEidProduto.Color := clWindow;
   DBEidUsuario.Color := clWindow;
