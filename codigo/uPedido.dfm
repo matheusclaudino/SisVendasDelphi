@@ -53,6 +53,7 @@ inherited FPedido: TFPedido
   inherited PageControl1: TPageControl
     Width = 741
     Height = 554
+    ActivePage = tbDados
     inherited tbDados: TTabSheet
       inherited gbDados: TGroupBox
         Width = 733
@@ -87,7 +88,6 @@ inherited FPedido: TFPedido
           Width = 23
           Height = 13
           Caption = 'Data'
-          FocusControl = DBEdataAtual
         end
         object Label2: TLabel
           Left = 16
@@ -104,7 +104,7 @@ inherited FPedido: TFPedido
           Height = 21
           DataField = 'idPedido'
           DataSource = DS
-          TabOrder = 6
+          TabOrder = 4
         end
         object DBprazo: TDBEdit
           Left = 594
@@ -113,7 +113,7 @@ inherited FPedido: TFPedido
           Height = 21
           DataField = 'prazoPagamento'
           DataSource = DS
-          TabOrder = 3
+          TabOrder = 1
         end
         object DBEidCliente: TDBEdit
           Left = 16
@@ -122,25 +122,7 @@ inherited FPedido: TFPedido
           Height = 21
           DataField = 'idCliente'
           DataSource = DS
-          TabOrder = 5
-        end
-        object DBEdataAtual: TDBEdit
-          Left = 593
-          Top = 82
-          Width = 128
-          Height = 21
-          DataField = 'data'
-          DataSource = DS
-          TabOrder = 1
-        end
-        object DBLookupComboBox1: TDBLookupComboBox
-          Left = 80
-          Top = 82
-          Width = 505
-          Height = 21
-          DataField = 'NomeCliente'
-          DataSource = DS
-          TabOrder = 0
+          TabOrder = 3
         end
         object DBEdescricao: TDBEdit
           Left = 16
@@ -149,7 +131,7 @@ inherited FPedido: TFPedido
           Height = 21
           DataField = 'descricao'
           DataSource = DS
-          TabOrder = 2
+          TabOrder = 0
         end
         object GroupBox1: TGroupBox
           Left = 16
@@ -159,7 +141,7 @@ inherited FPedido: TFPedido
           Caption = 'ITENS'
           Color = clBtnFace
           ParentColor = False
-          TabOrder = 4
+          TabOrder = 2
           object Label3: TLabel
             Left = 21
             Top = 64
@@ -357,8 +339,59 @@ inherited FPedido: TFPedido
             DataField = 'valorTotal'
             DataSource = DS
             TabOrder = 7
+            Visible = False
+            OnChange = ed_vlTotalChange
             OnEnter = ed_vlTotalEnter
           end
+        end
+        object DBEditBeleza1: TDBEditBeleza
+          Left = 80
+          Top = 82
+          Width = 505
+          Height = 21
+          Color = 14737361
+          DataField = 'NomeCliente'
+          DataSource = DS
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 5
+          Ativar_Pesquisa = True
+          mostrar_Botao = False
+          sql.Strings = (
+            'select idCliente, nome from Cliente where nome like :x')
+          database = 'SistemaDeVendas'
+          campo = 'nome'
+          Sempre_Mostrar_Janela = False
+          Outro_Edit = DBEidCliente
+          campo_outro_edit = 'idCliente'
+          CorBorda = clGray
+          NovoLayout = False
+        end
+        object DBEdataAtual: TDBEdit_Calendario
+          Left = 592
+          Top = 80
+          Width = 129
+          Height = 21
+          Hint = 'Duplo Clique para Buscar a data de hoje!'
+          DataField = 'data'
+          DataSource = DS
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 6
+          Formato_Data = 'dd/mm/yy'
+        end
+        object EditDinheiro1: TEditDinheiro
+          Left = 37
+          Top = 232
+          Width = 133
+          Height = 21
+          ReadOnly = True
+          TabOrder = 7
+          Formato = '0.00'
         end
       end
     end

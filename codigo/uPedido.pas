@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uPadraoModel, DB, Grids, DBGrids, StdCtrls, ComCtrls, ToolWin, uConexao,
   Mask, DBCtrls, ExtCtrls, DBTables, Provider, DBClient, Buttons, DateUtils,
-  DBGridBeleza;
+  DBGridBeleza,
+  DBEditBeleza,
+  DBEdit_Calendario,
+  EditDinheiro;
 
 type
   TFPedido = class(TFormPadrao)
@@ -17,8 +20,6 @@ type
     Label5: TLabel;
     DBEidCliente: TDBEdit;
     Label6: TLabel;
-    DBEdataAtual: TDBEdit;
-    DBLookupComboBox1: TDBLookupComboBox;
     Label2: TLabel;
     DBEdescricao: TDBEdit;
     GroupBox1: TGroupBox;
@@ -48,6 +49,9 @@ type
     ed_vlTotal: TDBEdit;
     btnFaturar: TToolButton;
     qExcluiPedidoItem: TQuery;
+    DBEditBeleza1: TDBEditBeleza;
+    DBEdataAtual: TDBEdit_Calendario;
+    EditDinheiro1: TEditDinheiro;
     procedure ed_barraKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure ed_vlTotalEnter(Sender: TObject);
@@ -67,6 +71,7 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure ed_barraKeyPress(Sender: TObject; var Key: Char);
     procedure btnDeletarClick(Sender: TObject);
+    procedure ed_vlTotalChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -430,6 +435,7 @@ begin
       {Volta o Foco pro Edit EAN}
       ed_barra.clear;
       ed_barra.SetFocus;
+      
   end;
   ed_barra.SetFocus;
 end;
@@ -442,6 +448,12 @@ begin
       inherited;
   end else
     ShowMessage('Pedido Ja Faturado - Não pode ser Excluído!');
+end;
+
+procedure TFPedido.ed_vlTotalChange(Sender: TObject);
+begin
+  inherited;
+  EditDinheiro1.Text := ed_vlTotal.EditText;
 end;
 
 end.
