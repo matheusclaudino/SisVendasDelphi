@@ -6,7 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, jpeg, ExtCtrls, ComCtrls, ToolWin, uConexao, DB, StdCtrls,
   Grids, DBGrids, DBCtrls, Buttons, ComObj, DBClient, MaskUtils,
-  DBGridBeleza;
+  DBGridBeleza,
+  ppBands, ppCache, ppClass, ppProd, ppReport, ppComm, ppRelatv, ppDB,
+  ppDBPipe, ppPrnabl, ppCtrls;
 
 type
   TFormPadrao = class(TForm)
@@ -30,6 +32,13 @@ type
     gbDados: TGroupBox;
     BitBtn1: TBitBtn;
     DBGrid1: TDBGridBeleza;
+    ppDBPipeline1: TppDBPipeline;
+    ppReport1: TppReport;
+    ppHeaderBand1: TppHeaderBand;
+    ppDetailBand1: TppDetailBand;
+    ppFooterBand1: TppFooterBand;
+    Button1: TButton;
+    ppDBText1: TppDBText;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -55,6 +64,7 @@ type
     procedure NivelGerente(F : TForm);
     procedure NivelVendedor(F : TForm);
     procedure NivelEstagiario(F : TForm);
+    procedure Button1Click(Sender: TObject);
   private
     procedure StatusBotoes(e: integer);
 
@@ -525,6 +535,12 @@ begin
     btnSalvar.Visible := False;
   end;
 
+end;
+
+procedure TFormPadrao.Button1Click(Sender: TObject);
+begin
+  ppReport1.Parameters.Add('OI');
+  ppReport1.Print;
 end;
 
 end.

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, XPMan, ComCtrls, ToolWin, jpeg, Buttons,
-  StdCtrls, AppEvnts, DBTables, BDE, DBClient;
+  StdCtrls, AppEvnts, DBTables, BDE, DBClient, Mask;
 
 type
   TForm1 = class(TForm)
@@ -162,6 +162,7 @@ begin
       ShowMessage('Registro vinculado a outra tabela, ERRO Chave Estrangeira!');
   end
   else if(E is EDBEngineError) then
+  begin
     with EDBEngineError(E) do
       case Errors[0].ErrorCode of
         DBIERR_KEYVIOL:
@@ -170,7 +171,12 @@ begin
           ShowMessage('Campo obrigatório não preenchido.');
         DBIERR_FORIEGNKEYERR:
           ShowMessage ('Erro integridade referencial.');
-      end
+    end;
+  end
+  else if(E is EDBEditError)then
+  begin
+      ShowMessage('Quantidade de dígitos inválida!');
+  end
   else
     ShowMessage('Erro no banco de dados:' + #13#13 + E.Message);
 end;
