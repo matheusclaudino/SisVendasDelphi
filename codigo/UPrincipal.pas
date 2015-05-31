@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, XPMan, ComCtrls, ToolWin, jpeg, Buttons,
-  StdCtrls, AppEvnts, DBTables, BDE, DBClient, Mask;
+  StdCtrls, AppEvnts, DBTables, BDE, DBClient, Mask, DB;
 
 type
   TForm1 = class(TForm)
@@ -176,6 +176,10 @@ begin
   else if(E is EDBEditError)then
   begin
       ShowMessage('Quantidade de dígitos inválida!');
+  end
+  else if(E is EDatabaseError) then
+  begin
+    ShowMessage('Não encontrado');
   end
   else
     ShowMessage('Erro no banco de dados:' + #13#13 + E.Message);

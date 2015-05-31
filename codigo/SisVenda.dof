@@ -136,9 +136,40 @@ ProductVersion=1.0.0.0
 Comments=
 [Excluded Packages]
 c:\program files (x86)\borland\delphi7\Bin\DBWEBXPRT.BPL=Borland Web Wizard Package
+[HistoryLists\hlDebugSourcePath]
+Count=2
+Item0=build
+Item1=$(ZEOSDBO_BUILD)
+[HistoryLists\hlConditionals]
+Count=1
+Item0=TESTGUI
 [HistoryLists\hlUnitAliases]
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlSearchPath]
-Count=1
+Count=8
+Item0=C:\Componentes Magnus D7\Zeos\packages\delphi7\;C:\Componentes Magnus D7\Zeos\src\component;C:\Componentes Magnus D7\Zeos\src;C:\Componentes Magnus D7\Zeos\packages\delphi7\build;C:\Program Files (x86)\Borland\Delphi7\Projects\Bpl
+Item1=C:\Componentes Magnus D7\Zeos\packages\delphi7\;C:\Componentes Magnus D7\Zeos\src\component;C:\Componentes Magnus D7\Zeos\src;C:\Componentes Magnus D7\Zeos\packages\delphi7\build
+Item2=C:\Componentes Magnus D7\Zeos\packages\delphi7\;C:\Componentes Magnus D7\Zeos\src\component;C:\Componentes Magnus D7\Zeos\src
+Item3=C:\Componentes Magnus D7\Zeos\packages\delphi7\;C:\Componentes Magnus D7\Zeos\src\component\
+Item4=build;C:\Componentes Magnus D7\Zeos\packages\delphi7\build;C:\Componentes Magnus D7\Zeos\src\component;C:\Componentes Magnus D7\Zeos\src\core;C:\Componentes Magnus D7\Zeos\src\dbc;C:\Componentes Magnus D7\Zeos\src\parsesql;C:\Componentes Magnus D7\Zeos\src\plain
+Item5=build
+Item6=build;../../test/framework
+Item7=$(ZEOSDBO_BUILD)
+[HistoryLists\hlUnitOutputDirectory]
+Count=2
+Item0=build
+Item1=$(ZEOSDBO_BUILD)
+[HistoryLists\hlOutputDirectorry]
+Count=2
+Item0=build
+Item1=$(ZEOSDBO_BUILD)
+[HistoryLists\hlBPLOutput]
+Count=3
 Item0=C:\Componentes Magnus D7
+Item1=build
+Item2=$(ZEOSDBO_BUILD)
+[HistoryLists\hlDCPOutput]
+Count=2
+Item0=build
+Item1=$(ZEOSDBO_BUILD)
