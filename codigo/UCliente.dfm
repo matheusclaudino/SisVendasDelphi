@@ -11,7 +11,6 @@ inherited FCliente: TFCliente
   end
   inherited PageControl1: TPageControl
     Height = 411
-    ActivePage = tbDados
     inherited tbDados: TTabSheet
       inherited gbDados: TGroupBox
         Width = 904

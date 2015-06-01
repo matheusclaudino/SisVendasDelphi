@@ -14,7 +14,7 @@ uses
   ppPrnabl, ppStrtch, ppSubRpt, ppVar, ppMemo, ppDBBDE, daDataView,
   daQueryDataView, daDBBDE, daDataModule, daSQL, raCodMod, ppViewr,
   ToolWin, raIDE, daDatMan, DBClient, uFrameAviso, ppPDFDevice, ppCTMain,
-  XiButton, jpeg, Menus;
+  XiButton, jpeg, Menus, uConexao;
 
 type
   Tf_relatorios = class(TForm)
@@ -120,6 +120,7 @@ type
     mNumTelaRelatNomeRelatorio: TStringField;
     mNumTelaRelatTela: TStringField;
     mNumTelaRelatFiltrosMarcados: TMemoField;
+    Image1: TImage;
     procedure btalterarClick(Sender: TObject);
     procedure btnovoClick(Sender: TObject);
     procedure btexcluirClick(Sender: TObject);

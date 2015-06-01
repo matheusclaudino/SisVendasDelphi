@@ -64,6 +64,8 @@ type
     procedure NivelGerente(F : TForm);
     procedure NivelVendedor(F : TForm);
     procedure NivelEstagiario(F : TForm);
+    function RetornaNomeForm(F : TForm): String;
+    procedure Button1Click(Sender: TObject);
   private
     procedure StatusBotoes(e: integer);
 
@@ -78,7 +80,7 @@ var
 
 implementation
 Uses  uPrincipal, uCliente, uProduto, uEntradaEstoque, uUsuario, uPedido, uConta, uConsultas,
-      uCidade;
+      uCidade, u_relatorios;
 
 {$R *.dfm}
 
@@ -534,6 +536,29 @@ begin
     btnSalvar.Visible := False;
   end;
 
+end;
+
+function TFormPadrao.RetornaNomeForm(F : TForm): String;
+begin
+  Result := F.Caption;
+end;
+
+procedure TFormPadrao.Button1Click(Sender: TObject);
+var
+  nomeTela: String;
+begin
+  f_relatorios := tf_relatorios.Create(Application);
+  with f_relatorios do
+  begin
+      try
+          Assimila_Relat_q(Screen.ActiveForm.Name, 0, DS.DataSet, DS.DataSet, '', '');
+          ShowModal;
+      finally
+          Relatorios_sis.close;
+          relats_usur.close;
+          Free;
+      end;
+   end;
 end;
 
 end.

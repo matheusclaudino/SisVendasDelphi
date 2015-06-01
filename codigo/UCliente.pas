@@ -50,7 +50,6 @@ type
     procedure DBEcnpjEnter(Sender: TObject);
     procedure DBEtelFixoEnter(Sender: TObject);
     procedure DBEtelCelEnter(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -62,7 +61,7 @@ var
 
 implementation
 
-uses MaskUtils, uPrincipal, u_relatorios;
+uses MaskUtils, uPrincipal;
 
 {$R *.dfm}
 
@@ -145,23 +144,6 @@ procedure TFCliente.DBEtelCelEnter(Sender: TObject);
 begin
   inherited;
   DBEtelCel.Field.EditMask:= '(00)00000-0000;1;_';
-end;
-
-procedure TFCliente.Button1Click(Sender: TObject);
-begin
-  inherited;
-    f_relatorios := tf_relatorios.Create(Application);
-  with f_relatorios do
-  begin
-      try
-          Assimila_Relat_q('FCliente', 0, DS.DataSet, DS.DataSet, '', '');
-          ShowModal;
-      finally
-          Relatorios_sis.close;
-          relats_usur.close;
-          Free;
-      end;
-   end;
 end;
 
 end.

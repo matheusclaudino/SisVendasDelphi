@@ -122,8 +122,8 @@ object FormPadrao: TFormPadrao
       object gbDados: TGroupBox
         Left = 0
         Top = 0
-        Width = 912
-        Height = 406
+        Width = 904
+        Height = 399
         Align = alClient
         Color = clBtnFace
         ParentColor = False
@@ -212,12 +212,13 @@ object FormPadrao: TFormPadrao
             000000000064}
         end
         object Button1: TButton
-          Left = 816
-          Top = 24
+          Left = 56
+          Top = 16
           Width = 75
           Height = 25
           Caption = 'RELAT'#211'RIO'
           TabOrder = 1
+          OnClick = Button1Click
         end
       end
       object DBGrid1: TDBGridBeleza
