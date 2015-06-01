@@ -64,7 +64,6 @@ type
     procedure NivelGerente(F : TForm);
     procedure NivelVendedor(F : TForm);
     procedure NivelEstagiario(F : TForm);
-    procedure Button1Click(Sender: TObject);
   private
     procedure StatusBotoes(e: integer);
 
@@ -535,12 +534,6 @@ begin
     btnSalvar.Visible := False;
   end;
 
-end;
-
-procedure TFormPadrao.Button1Click(Sender: TObject);
-begin
-  ppReport1.Parameters.Add('OI');
-  ppReport1.Print;
 end;
 
 end.

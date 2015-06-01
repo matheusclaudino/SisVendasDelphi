@@ -279,6 +279,9 @@ inherited FCliente: TFCliente
         inherited BitBtn1: TBitBtn
           OnClick = BitBtn1Click
         end
+        inherited Button1: TButton
+          OnClick = Button1Click
+        end
       end
       inherited DBGrid1: TDBGridBeleza
         Height = 318

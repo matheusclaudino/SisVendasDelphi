@@ -218,7 +218,6 @@ object FormPadrao: TFormPadrao
           Height = 25
           Caption = 'RELAT'#211'RIO'
           TabOrder = 1
-          OnClick = Button1Click
         end
       end
       object DBGrid1: TDBGridBeleza
