@@ -62,6 +62,7 @@ Uses  uPadraoModel, UCliente, uCidade, uPedido, uProduto, uUsuario, UEntradaEsto
 
 procedure TForm1.FormShow(Sender: TObject);
 begin
+  ShowMessage(DataModule1.qLoginnome.AsString + ' Bem vindo ao Real System!!!');
    mLog.Lines.Add('DATA: ' + FormatDateTime('dd/mm/yyyy',date) + ' ENTROU NO SISTEMA.');
    //VENDEDOR OU ESTAGIÁRIO
    if(DataModule1.qLoginnivel.AsInteger = 3) OR (DataModule1.qLoginnivel.AsInteger = 4) then
@@ -69,10 +70,9 @@ begin
     imgRecalcular.Enabled := False;
     imgRecalcular.Hint := 'ACESSO NEGADO!!!';
    end;
-   
+
   {Aplica Tela Cheia ao Form}
   ShowWindow(Handle, SW_MAXIMIZE);
-  ShowMessage(DataModule1.qLoginnome.AsString + ' Bem vindo ao Real System!!!');
 end;
 
 procedure TForm1.imgClienteClick(Sender: TObject);
