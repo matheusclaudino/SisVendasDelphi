@@ -3946,7 +3946,7 @@ object f_relatorios: Tf_relatorios
     Top = 73
     Width = 466
     Height = 249
-    ActivePage = tbRelatsSistema
+    ActivePage = tbRelatsUsuarios
     TabOrder = 1
     object tbRelatsSistema: TTabSheet
       Caption = 'Sistema'
@@ -4212,7 +4212,7 @@ object f_relatorios: Tf_relatorios
       AutoSize = True
       Caption = 'btalterar'
       Enabled = False
-      ImageIndex = 5
+      ImageIndex = 2
       ParentShowHint = False
       ShowHint = True
       OnClick = btalterarClick

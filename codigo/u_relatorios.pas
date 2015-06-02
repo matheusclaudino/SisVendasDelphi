@@ -544,7 +544,7 @@ begin
         ppReport1.TextFileName        := SaveDialog1.FileName;
         ppReport1.Print;
     end;
-    
+
 end;
 
 procedure Tf_relatorios.btRelatsSistemaClick(Sender: TObject);
