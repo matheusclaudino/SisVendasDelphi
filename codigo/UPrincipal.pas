@@ -137,8 +137,14 @@ begin
 	  WM_LBUTTONUP:
 	  begin
 	    Componente := FindVCLWindow(Mouse.CursorPos);
+        try
           mLog.Lines.Add('HORA: ' + FormatDateTime('hh:mm:ss ',now) +
           DataModule1.qLoginusername.AsString + ' Interagiu com o ' + Componente.Name);
+        except
+        on E : EAccessViolation do
+           mLog.Lines.Add('HORA: ' + FormatDateTime('hh:mm:ss ',now) +
+          DataModule1.qLoginusername.AsString + ' Interagiu com o ' + 'Combobox');
+        end;
 		    //Showmessage('Classe: ' + Componente.ClassName + ' - Nome: ' + Componente.Name  );
 	  end;
   end;//fim case
