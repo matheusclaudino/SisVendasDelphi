@@ -3941,115 +3941,6 @@ object f_relatorios: Tf_relatorios
     ParentFont = False
     Transparent = True
   end
-  object barra: TToolBar
-    Left = 189
-    Top = 14
-    Width = 123
-    Height = 60
-    Cursor = crHandPoint
-    Align = alNone
-    AutoSize = True
-    ButtonHeight = 30
-    ButtonWidth = 31
-    Color = clWindowText
-    EdgeBorders = []
-    Flat = True
-    Images = DataModule1.ImageList1
-    ParentColor = False
-    TabOrder = 0
-    Transparent = True
-    object btimprimir: TToolButton
-      Left = 0
-      Top = 0
-      Hint = 'Imprimir Relat'#243'rio Atual'
-      AutoSize = True
-      Caption = 'btimprimir'
-      ImageIndex = 10
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = btimprimirClick
-    end
-    object btEmail: TToolButton
-      Left = 23
-      Top = 0
-      Hint = 'Enviar para eMail!!!'
-      Caption = 'btEmail'
-      ImageIndex = 11
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = btEmailClick
-    end
-    object btPDF: TToolButton
-      Left = 54
-      Top = 0
-      Hint = 'Exportar Relat'#243'rio para Arquivo PDF'
-      Caption = 'btPDF'
-      ImageIndex = 4
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = btPDFClick
-    end
-    object button5: TToolButton
-      Left = 85
-      Top = 0
-      Caption = 'button5'
-      Enabled = False
-      Wrap = True
-    end
-    object ToolButton2: TToolButton
-      Left = 0
-      Top = 30
-      Caption = 'ToolButton2'
-      Enabled = False
-    end
-    object btnovo: TToolButton
-      Left = 31
-      Top = 30
-      Hint = 'Novo Relat'#243'rio a partir do Atual'
-      AutoSize = True
-      Caption = 'btnovo'
-      Enabled = False
-      ImageIndex = 0
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = btnovoClick
-    end
-    object btalterar: TToolButton
-      Left = 54
-      Top = 30
-      Hint = 'Alterar Relat'#243'rio'
-      AutoSize = True
-      Caption = 'btalterar'
-      Enabled = False
-      ImageIndex = 5
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = btalterarClick
-    end
-    object btexcluir: TToolButton
-      Left = 77
-      Top = 30
-      Hint = 'Excluir Relat'#243'rio'
-      AutoSize = True
-      Caption = 'btexcluir'
-      Enabled = False
-      ImageIndex = 1
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = btexcluirClick
-    end
-    object btsair: TToolButton
-      Left = 100
-      Top = 30
-      Hint = 'Sair'
-      AutoSize = True
-      Caption = 'btsair'
-      ImageIndex = 3
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = btsairClick
-    end
-  end
   object PageControl1: TPageControl
     Left = 8
     Top = 73
@@ -4241,6 +4132,114 @@ object f_relatorios: Tf_relatorios
     Caption = 'Usuario'
     TabOrder = 2
     OnClick = btRelatsSistemaClick
+  end
+  object barra: TToolBar
+    Left = 192
+    Top = 12
+    Width = 115
+    Height = 60
+    Cursor = crHandPoint
+    Align = alNone
+    AutoSize = True
+    ButtonHeight = 30
+    Color = clWindowText
+    EdgeBorders = []
+    Flat = True
+    Images = DataModule1.ImageList1
+    ParentColor = False
+    TabOrder = 0
+    Transparent = True
+    object btimprimir: TToolButton
+      Left = 0
+      Top = 0
+      Hint = 'Imprimir Relat'#243'rio Atual'
+      AutoSize = True
+      Caption = 'btimprimir'
+      ImageIndex = 10
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btimprimirClick
+    end
+    object btEmail: TToolButton
+      Left = 23
+      Top = 0
+      Hint = 'Enviar para eMail!!!'
+      Caption = 'btEmail'
+      ImageIndex = 11
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btEmailClick
+    end
+    object btPDF: TToolButton
+      Left = 46
+      Top = 0
+      Hint = 'Exportar Relat'#243'rio para Arquivo PDF'
+      Caption = 'btPDF'
+      ImageIndex = 4
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btPDFClick
+    end
+    object button5: TToolButton
+      Left = 69
+      Top = 0
+      Caption = 'button5'
+      Enabled = False
+      Wrap = True
+    end
+    object ToolButton2: TToolButton
+      Left = 0
+      Top = 30
+      Caption = 'ToolButton2'
+      Enabled = False
+    end
+    object btnovo: TToolButton
+      Left = 23
+      Top = 30
+      Hint = 'Novo Relat'#243'rio a partir do Atual'
+      AutoSize = True
+      Caption = 'btnovo'
+      Enabled = False
+      ImageIndex = 0
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btnovoClick
+    end
+    object btalterar: TToolButton
+      Left = 46
+      Top = 30
+      Hint = 'Alterar Relat'#243'rio'
+      AutoSize = True
+      Caption = 'btalterar'
+      Enabled = False
+      ImageIndex = 5
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btalterarClick
+    end
+    object btexcluir: TToolButton
+      Left = 69
+      Top = 30
+      Hint = 'Excluir Relat'#243'rio'
+      AutoSize = True
+      Caption = 'btexcluir'
+      Enabled = False
+      ImageIndex = 1
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btexcluirClick
+    end
+    object btsair: TToolButton
+      Left = 92
+      Top = 30
+      Hint = 'Sair'
+      AutoSize = True
+      Caption = 'btsair'
+      ImageIndex = 3
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btsairClick
+    end
   end
   object ppDBPipeline1: TppDBPipeline
     DataSource = DataSource1

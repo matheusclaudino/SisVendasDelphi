@@ -193,7 +193,8 @@ begin
 
  // nomerep := ('RelatoriosUsuario')+ '\' + Relats_UsurArquivo.AsString;
   //nomerep := ('C:\Users\Thallys\Desktop\Tecno_Vendas-master\app\Relatorios\RelatoriosUsuario')+ '\' + Relats_UsurArquivo.AsString;
-  nomerep := 'relatorios\usuarios\';
+  //nomerep := '\relatorios\usuarios';
+  nomerep := ExtractFilePath(Application.ExeName)+'relatorios\usuarios' + '\' + Relats_UsurArquivo.AsString;
   ppreport1.template.FileName := nomerep;
   ppreport1.template.LoadFromFile;
 
@@ -224,8 +225,8 @@ begin
       end;
 }
   case RelatsAtual of
-      1: nomerep := 'relatorios\sistema\';
-      2: nomerep := 'relatorios\usuarios\';
+      1: nomerep := ExtractFilePath(Application.ExeName)+'relatorios\sistema';
+      2: nomerep := ExtractFilePath(Application.ExeName)+'relatorios\usuarios';
       end;
       ppreport1.template.FileName := nomerep;
       ppreport1.template.LoadFromFile;
@@ -250,7 +251,8 @@ begin
   //ppReport1.template.FileName    := f_principal.BuscaParamTexto('RelatoriosUsuario') + '\' + _tela + ' '+ inttostr(seq) + ' - '+nomerep+'.rtm';
 
  // nomerep := ('C:\Users\Thallys\Desktop\Tecno_Vendas-master\app\Relatorios\RelatoriosUsuario')+ '\' + Relats_UsurArquivo.AsString;
-  ppReport1.template.FileName    := 'relatorios\usuarios\' + _tela + ' '+ inttostr(seq) + ' - '+nomerep+'.rtm';
+  ppReport1.template.FileName    := ExtractFilePath(Application.ExeName)+'relatorios\usuarios\' + _tela + ' '+ inttostr(seq) + ' - '+nomerep+'.rtm';
+
   ppReport1.template.SaveToFile;
   PageControl1.ActivePage        := tbRelatsUsuarios;
   ppdesigner1.Report             := ppreport1;
@@ -269,7 +271,8 @@ begin
   else if Application.MessageBox('Deseja realmente excluir relatório atual?','Exclusão de relatório',mb_okcancel + mb_iconquestion) = idok then
   begin
       //nomearq        := f_principal.BuscaParamTexto('RelatoriosUsuario')+ '\' + Relats_UsurArquivo.AsString;
-      nomearq        := 'relatorios\usuarios\' + Relats_UsurArquivo.AsString;
+      nomearq        := ExtractFilePath(Application.ExeName)+ 'relatorios\usuarios\' + Relats_UsurArquivo.AsString;
+
       deletefile(nomearq);
       Relats_Usur.delete;
   end;
@@ -323,8 +326,8 @@ begin
   //2: nomerep := f_principal.BuscaParamTexto('RelatoriosUsuario') + '\' +Relats_UsurArquivo.AsString;
   //end;
   case RelatsAtual of
-      1: nomerep := 'relatorios\sistema\';
-      2: nomerep := 'relatorios\usuarios\';
+      1: nomerep := ExtractFilePath(Application.ExeName)+'relatorios\sistema'+ '\' + Relatorios_Sisarquivo.AsString;
+      2: nomerep := ExtractFilePath(Application.ExeName)+'relatorios\usuarios'+ '\' + Relats_UsurArquivo.AsString;
       end;
 
   ppReport1.template.FileName := nomerep;
@@ -348,6 +351,7 @@ end;
 procedure Tf_relatorios.FormShow(Sender: TObject);
 begin
     ppDesigner1.IniStorageName := ExtractFilePath(Application.ExeName)+'\RBuilder.ini';
+    
 //    if not dm_dados.mConfig.active then
 //        dm_dados.mConfig.open;
 
@@ -401,7 +405,7 @@ begin
   //Dir := f_principal.BuscaParamTexto('RelatoriosSistema');
      Dir := 'relatorios\sistema\';
   //if Origem = 2 then Dir := f_principal.BuscaParamTexto('RelatoriosUsuario');
-  if Origem = 2 then Dir := 'relatorios\usuarios\';
+  if Origem = 2 then Dir := ExtractFilePath(Application.ExeName) + 'relatorios\usuarios';
 
   if Copy(Dir, 1, length(Dir)) <> '\' then
       Dir := Dir + '\';
@@ -516,13 +520,13 @@ begin
     begin
         s       := Relatorios_sisdescricao.AsString;
         //nomerep := f_principal.BuscaParamTexto('RelatoriosSistema') + '\' + Relatorios_Sisarquivo.AsString;
-        nomerep := 'relatorios\sistema\';
+        nomerep := ExtractFilePath(Application.ExeName) + 'relatorios\sistema\';
     end;
     2:
     begin
         s       := relats_usurDescricao.AsString;
         //nomerep := f_principal.BuscaParamTexto('RelatoriosUsuario') + '\' +Relats_UsurArquivo.AsString;
-        nomerep := 'relatorios\usuarios\';
+        nomerep := ExtractFilePath(Application.ExeName)+ 'relatorios\usuarios\';
     end;
     end;
 
@@ -590,14 +594,12 @@ begin
     1:
     begin
         ppReport1.EmailSettings.Subject := Relatorios_sisdescricao.AsString;
-        //nomerep                         := f_principal.BuscaParamTexto('RelatoriosSistema')
-        //    + '\' + Relatorios_Sisarquivo.AsString;
+        nomerep   := ExtractFilePath(Application.ExeName) + 'relatorios\sistema\' + Relatorios_Sisarquivo.AsString;
     end;
     2:
     begin
         ppReport1.EmailSettings.Subject := relats_usurDescricao.AsString;
-        //nomerep                         := f_principal.BuscaParamTexto('RelatoriosUsuario')
-        //    + '\' + Relats_UsurArquivo.AsString;
+        nomerep   := ExtractFilePath(Application.ExeName)+ 'relatorios\usuarios\' + Relats_UsurArquivo.AsString;
     end;
     end;
 

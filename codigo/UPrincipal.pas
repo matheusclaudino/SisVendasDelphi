@@ -116,9 +116,15 @@ begin
 end;
 
 procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  caminho : String;
 begin
   mLog.Lines.Add('HORA: ' + FormatDateTime('hh:mm:ss',now) + ' SAIU DO SISTEMA');
-  mLog.Lines.SaveToFile('log\'+FormatDateTime('dd-mm-yyyy',date)+FormatDateTime('-hh.mm.ss.',now)+DataModule1.qLoginusername.AsString+'log.txt');
+  //mLog.Lines.SaveToFile('log\'+FormatDateTime('dd-mm-yyyy',date)+'-'+FormatDateTime('hh.mm.ss',now)+'.'+DataModule1.qLoginusername.AsString+'log.txt');
+  caminho := ExtractFilePath(Application.ExeName);
+  mLog.Lines.SaveToFile(caminho + 'log\'+FormatDateTime('dd-mm-yyyy',date)
+  +'-'+FormatDateTime('hh.mm.ss',now)+'.'
+  +DataModule1.qLoginusername.AsString+'log.txt');
   Application.Terminate;
 end;
 
